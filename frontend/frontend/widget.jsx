@@ -11,7 +11,7 @@ class Widget extends React.Component {
 
     return (
       <div>
-        Hello there
+        Hello there world
       </div>
     );
   }
