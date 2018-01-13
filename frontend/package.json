@@ -18,6 +18,8 @@
     "babel-preset-react": "^6.11.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.5.2",
     "webpack": "^2.2.1"
   }
