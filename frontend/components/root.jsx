@@ -1,12 +1,16 @@
-import React from 'react'
+import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Widget from './widget';
+import App from './app';
 
-const Root = () => {
+const Root = ({ store }) => {
   return (
-    <HashRouter>
-      <Widget />
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
   );
 };
 
