@@ -35,11 +35,14 @@ app.get('/getLoans', function(req,res) {
   var unpayedLoans = []
   for(var loanId in unpayedLoanIds) {
     var bLoan = contractInstance.getLoanDetails.call(loanId, web3.eth.accounts[0]);
+    var origination = parseInt(bLoan[2].toString());
+    var duration = parseInt(bLoan[3].toString());
+    var timePassed = new Date() - origination;
+    var daysRemaining = (((((duration - timePassed)/1000)/60)/60)/24)
     var loan = {
-      amount: bLoan[0].toString(),
-      rate: bLoan[0].toString(),
-      origination: bLoan.toString(),
-      duration: bLoan.toString()
+      loanId: loanId,
+      paybackAmount: bLoan[0].toString(),
+      daysRemaining: daysRemaining
     }
     unpayedLoans.push(loan)
   }
