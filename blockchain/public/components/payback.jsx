@@ -9,7 +9,7 @@ class Payback extends React.Component {
 
   }
   componentWillMount() {
-    this.props.getloans(this.props.user.address);
+    // this.props.getloans(this.props.user.address);
     // debugger
   }
   componentWillReceiveProps(nextProps) {
@@ -25,7 +25,6 @@ class Payback extends React.Component {
     });
     return (
       <div>
-      <h1>You have {} ETH</h1>
       <ul id="loans">
         {loanList}
       </ul>

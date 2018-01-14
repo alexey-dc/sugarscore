@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Borrow from './borrow';
-import { borrowRequestOnBlockchain, getProfileThunk  } from './actions';
+import { borrowRequest, getProfileThunk  } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
   let user = state.currentUser;
@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   dispatch(getProfileThunk(0x6F54ABC78124EFCB12097ABCDEF));
   return {
-    newLoan: (loan) => dispatch(borrowRequestOnBlockchain(loan))
+    newLoan: (loan) => dispatch(borrowRequest(loan))
   };
 };
 export default withRouter(connect(

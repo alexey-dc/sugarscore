@@ -25,7 +25,6 @@ export const loginUser = (user) => {
   };
 };
 export const receiveLoans = (loans) => {
-  debugger
   return {
     type: RECEIVE_LOANS,
     loans

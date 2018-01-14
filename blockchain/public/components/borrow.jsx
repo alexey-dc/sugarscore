@@ -16,14 +16,14 @@ class Borrow extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    let loan = {
-      address: this.user.address,
-      amount: this.state.borrowAmount,
-      ratePercent: 5,
-      durationDays: 30
-    };
-    this.props.newLoan(loan);
-    // this.props.newLoan(this.state.borrowAmount);
+    // let loan = {
+    //   address: this.user.address,
+    //   amount: this.state.borrowAmount,
+    //   ratePercent: 5,
+    //   durationDays: 30
+    // };
+    // this.props.newLoan(loan);
+    this.props.newLoan(this.state.borrowAmount);
     this.props.history.push(`/payback`);
   }
   componentWillReceiveProps(nextProps) {

@@ -4665,7 +4665,6 @@ var loginUser = exports.loginUser = function loginUser(user) {
   };
 };
 var receiveLoans = exports.receiveLoans = function receiveLoans(loans) {
-  debugger;
   return {
     type: RECEIVE_LOANS,
     loans: loans
@@ -18745,14 +18744,14 @@ var Borrow = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      var loan = {
-        address: this.user.address,
-        amount: this.state.borrowAmount,
-        ratePercent: 5,
-        durationDays: 30
-      };
-      this.props.newLoan(loan);
-      // this.props.newLoan(this.state.borrowAmount);
+      // let loan = {
+      //   address: this.user.address,
+      //   amount: this.state.borrowAmount,
+      //   ratePercent: 5,
+      //   durationDays: 30
+      // };
+      // this.props.newLoan(loan);
+      this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
     }
   }, {
@@ -18845,7 +18844,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   dispatch((0, _actions.getProfileThunk)(0x6F54ABC78124EFCB12097ABCDEF));
   return {
     newLoan: function newLoan(loan) {
-      return dispatch((0, _actions.borrowRequestOnBlockchain)(loan));
+      return dispatch((0, _actions.borrowRequest)(loan));
     }
   };
 };
@@ -18968,7 +18967,7 @@ var Payback = function (_React$Component) {
   _createClass(Payback, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      this.props.getloans(this.props.user.address);
+      // this.props.getloans(this.props.user.address);
       // debugger
     }
   }, {
@@ -18989,12 +18988,6 @@ var Payback = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h1',
-          null,
-          'You have ',
-          ' ETH'
-        ),
         _react2.default.createElement(
           'ul',
           { id: 'loans' },
@@ -19058,9 +19051,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    getloans: function getloans(address) {
-      return dispatch((0, _actions.getLoans)(address));
-    },
+    // getloans: (address) => dispatch(getLoans(address)),
     payback: function payback(loanId) {
       return dispatch((0, _actions.paybackLoan)(loanId));
     }

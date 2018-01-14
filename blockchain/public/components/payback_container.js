@@ -14,7 +14,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = dispatch => ({
-  getloans: (address) => dispatch(getLoans(address)),
+  // getloans: (address) => dispatch(getLoans(address)),
   payback: (loanId) => dispatch(paybackLoan(loanId))
 });
 export default withRouter(connect(
