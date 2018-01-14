@@ -68,7 +68,7 @@ alert('borrow money');
       "Content-Type": "application/json",
     });
 
-        fetch('/payBackMoney', {
+        fetch('/payBack', {
           method: 'post',
           headers: headers,
           body: JSON.stringify({ ammount: $('#payback_ammount').val() }),

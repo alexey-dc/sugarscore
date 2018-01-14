@@ -59,7 +59,11 @@ app.post('/borrow', function(req, res) {
 app.post('/payBack', function(req, res) {
   var address = req.query.address;
   var loanId = req.query.loanId;
-
+  var repayTimestamp = new Date();
+  contractInstance.payBack(address, { from: web3.eth.accounts[0] }, function(result) {
+    // TODO: support failure
+    res.send({ success: true });
+  });
 });
 
 
