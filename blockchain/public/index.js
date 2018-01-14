@@ -21,30 +21,28 @@ $('#voteSubmit').click(function(event) {
 
 alert('borrow money');
 
-  var bAmmount = $('#borrow_ammount').val();
+
 
 
     const headers = new Headers({
       "Content-Type": "application/json",
     });
 
-        fetch('/borrowMoney', {
+        fetch('/borrow', {
           method: 'post',
           headers: headers,
-          body: JSON.stringify({ ammount: $('#borrow_ammount').val() }),
+          body: JSON.stringify(
+            { address: "0x81f1b97c1196ffcfd451dcf6d3f183a55c7c962d4a969e04356ddadf24034a7e",
+               amount: 300,
+               ratePercent: 5,
+               durationDays:60
+
+          }),
         })
         .then(res => res.json())
         .then(res => {
 
-
-          $('.table_of_transactions').append('<tr>'
-          +'<th class="borrowed">+ 0xfcb635837db6315d20820ee7b3f018867fec0aca78e3e69a52c146b28d402709</th>'
-            +'<th>'+bAmmount+' ETH</th>'
-            +'<th></th>'
-            +'<th>Jan/2/2018</th>'
-          +'</tr>');
-
-          //alert(JSON.stringify(res));
+          alert(JSON.stringify(res));
 
           $('.current_eth').html('Current ETH in wallet :'+res.ammount);
         }).catch(function() {

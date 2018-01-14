@@ -40,9 +40,22 @@ app.post('/borrow', function(req, res) {
   var amount = req.query.amount;
   var ratePercent = req.query.ratePercent;
   var durationDays = req.query.durationDays;
-  // contractInstance.getProfile(address, { from: web3.eth.accounts[0] }, function(result) {
-  //   res.send({ votes: totalVotes, name: candidateName });
-  // });
+  var origination = 12;
+
+  console.log(address+amount+ratePercent+durationDays+origination);
+
+      try{
+
+        //(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower)
+         contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
+          // res.send();
+          console.log(res);
+        });//contractInstance
+
+      } catch (e) {
+        res.status('400').send(`Failed! ${e}`);
+      }//catch
+
 });
 
 app.post('/payBack', function(req, res) {

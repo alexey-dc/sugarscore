@@ -12,9 +12,9 @@ contract Ibcs {
     uint64 duration; // Milliseconds
     uint64 repayTimestamp; // 0 means loan has not been paid off
   }
-  
+
   mapping (uint256 => Loan) private loans;
-  mapping (address => uint256) private balance; // 
+  mapping (address => uint256) private balance; //
   mapping (address => uint256[]) private userLoanIds; // loans by user
 
   address private owner;
@@ -22,7 +22,7 @@ contract Ibcs {
   string public symbol;
   uint8 public decimals = 18;
   uint256 public totalSupply;
-  
+
   function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) public payable {
     totalSupply = initialSupply * 10 ** uint256(decimals);
     owner = msg.sender;
@@ -72,19 +72,19 @@ contract Ibcs {
     return (loan.amount, loan.rate, loan.origination, loan.duration);
   }
 
-/*
-  function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
+
+  function borrow(uint256 amount, uint32 rate, uint64 origination, uint32 duration, address borrower) {
     if (balance[borrower] >= amount) {
       uint256 id = loanIndex++;
       loans[id] = Loan(id, amount, rate, origination, duration, 0);
       userLoanIds[borrower].push(id);
       balance[borrower] = balance[borrower] - amount;
-    }    
+    }
   }
 
   function payBack(address borrower, uint id, uint32 repayTimestamp) {
     loans[id].repayTimestamp = repayTimestamp;
     balance[borrower] = balance[borrower] + loans[id].amount;
   }
-*/
+
 }
