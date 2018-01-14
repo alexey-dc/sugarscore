@@ -28,7 +28,7 @@ contract Ibcs {
   }
   
   mapping (uint256 => Loan) private loans;
-  mapping (address => uint256) private balanceOf;
+  mapping (address => uint256) private balance; // 
   mapping (address => uint256[]) private userLoanIds; // loans by user
 
   address private owner;
@@ -46,7 +46,7 @@ contract Ibcs {
   function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
     totalSupply = initialSupply * 10 ** uint256(decimals);
     owner = msg.sender;
-    balanceOf[owner] = totalSupply;
+    balance[owner] = totalSupply;
     name = tokenName;
     symbol = tokenSymbol;
   }
@@ -100,13 +100,17 @@ contract Ibcs {
 */
 
   function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
-    uint id = loanIndex++;
-    loans[id] = Loan(id, amoun, rate, origination, duration, borrower);
-    currentLoans[borrower].push(id);
+    if (balance[borrower] >= amount) {
+      uint256 id = loanIndex++;
+      loans[id] = Loan(id, amount, rate, origination, duration, 0);
+      userLoanIds[borrower].push(id);
+      balance[borrower] = balance[borrower] - amount;
+    }    
   }
 
-  function payBack() {
-    
+  function payBack(address borrower, uint id, uint32 repayTimestamp) {
+    loans[id].repayTimestamp = repayTimestamp;
+    balance[borrower] = balance[borrower] + loans[id].amount;
   }
 
 }
