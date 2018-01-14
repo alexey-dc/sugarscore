@@ -16,7 +16,7 @@ app.get('/', function(req, res){
 app.get('/getProfile', function(req, res) {
   try {
     var address = req.query.address;
-    var bProfile = contractInstance.getProfile.call(address, web3.eth.accounts[0]);
+    var bProfile = contractInstance.getProfile.call(address, web3.eth.accounts[1]);
     var profile = {
       coinsIn: bProfile[0].toString(),
       totalBorrowed: bProfile[1].toString(),
@@ -35,7 +35,7 @@ app.get('/getLoans', function(req,res) {
   var unpayedLoanIds = contractInstance.getUnpayedLoanIds.call(address, web3.eth.accounts[0]);
   var unpayedLoans = []
   for(var loanId in unpayedLoanIds) {
-    var bLoan = contractInstance.getLoanDetails.call(loanId, web3.eth.accounts[0]);
+    var bLoan = contractInstance.getLoanDetails.call(loanId, web3.eth.accounts[1]);
     var origination = parseInt(bLoan[2].toString());
     var duration = parseInt(bLoan[3].toString());
     var timePassed = new Date() - origination;
@@ -58,7 +58,7 @@ app.get('/borrow', function(req, res) {
   var origination = new Date().getTime();
   try{
     console.log(amount, ratePercent, origination, durationDays, address)
-    contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
+    contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[1] }, function(result) {
       // TODO: support failure
       console.log("Borrow result: ", result)
       res.send({ success: true });
@@ -72,7 +72,7 @@ app.get('/payBack', function(req, res) {
   var address = req.query.address;
   var loanId = req.query.loanId;
   var repayTimestamp = new Date();
-  contractInstance.payBack(address, { from: web3.eth.accounts[0] }, function(result) {
+  contractInstance.payBack(address, { from: web3.eth.accounts[1] }, function(result) {
     // TODO: support failure
     res.send({ success: true });
   });

@@ -4665,6 +4665,7 @@ var loginUser = exports.loginUser = function loginUser(user) {
   };
 };
 var receiveLoans = exports.receiveLoans = function receiveLoans(loans) {
+  debugger;
   return {
     type: RECEIVE_LOANS,
     loans: loans
@@ -4714,9 +4715,9 @@ var paybackLoanOnBlockchain = exports.paybackLoanOnBlockchain = function payback
     });
   };
 };
-var getLoans = exports.getLoans = function getLoans(data) {
+var getLoans = exports.getLoans = function getLoans(address) {
   return function (dispatch) {
-    return fetchLoans(data).then(function (res) {
+    return fetchLoans(address).then(function (res) {
       return dispatch(receiveLoans(res));
     });
   };
@@ -18966,7 +18967,10 @@ var Payback = function (_React$Component) {
 
   _createClass(Payback, [{
     key: 'componentWillMount',
-    value: function componentWillMount() {}
+    value: function componentWillMount() {
+      this.props.getloans(this.props.user.address);
+      // debugger
+    }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
@@ -19045,6 +19049,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var loans = state.loans;
   var user = state.currentUser;
+
   // getLoans(user.address);
   return {
     user: user,
@@ -19172,6 +19177,10 @@ var reducer = function reducer() {
       };
       // debugger
       newState.loans.push(newLoan);
+      return newState;
+    case _actions.RECEIVE_LOANS:
+      newState = Object.assign({}, state);
+      newState.loans = action.loans;
       return newState;
     case _actions.PAYBACK_LOAN:
       newState = Object.assign({}, state);

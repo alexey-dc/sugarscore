@@ -25,6 +25,7 @@ export const loginUser = (user) => {
   };
 };
 export const receiveLoans = (loans) => {
+  debugger
   return {
     type: RECEIVE_LOANS,
     loans
@@ -76,8 +77,8 @@ export const paybackLoanOnBlockchain = (data) => dispatch => (
   payBack(data)
     .then(res => dispatch(paybackLoan(res)))
 );
-export const getLoans = (data) => dispatch => (
-  fetchLoans(data)
+export const getLoans = (address) => dispatch => (
+  fetchLoans(address)
     .then(res => dispatch(receiveLoans(res)))
 );
 export const getProfileThunk = (address) => dispatch => (

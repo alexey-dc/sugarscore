@@ -9,6 +9,8 @@ class Payback extends React.Component {
 
   }
   componentWillMount() {
+    this.props.getloans(this.props.user.address);
+    // debugger
   }
   componentWillReceiveProps(nextProps) {
     // nextProps.loans

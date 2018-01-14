@@ -1,5 +1,6 @@
 import { 
   RECEIVE_USER, 
+  RECEIVE_LOANS,
   RECEIVE_BORROW_REQUEST,
   PAYBACK_LOAN
 } from './actions';
@@ -38,6 +39,10 @@ const reducer = (state = initialState, action) => {
       };
       // debugger
       newState.loans.push(newLoan);
+      return newState;
+    case RECEIVE_LOANS:
+      newState = Object.assign({}, state); 
+      newState.loans = action.loans;
       return newState;
     case PAYBACK_LOAN:
       newState = Object.assign({}, state); 
