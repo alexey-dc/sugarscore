@@ -24,24 +24,12 @@ contract Ibcs {
     uint32 rate; // decimals not supported in solidity; say 100% = 10000 rate, 0.1% = 10 rate
     uint64 origination; // Unix timestamp
     uint64 duration; // Milliseconds
-  }
-
-  struct LoanTransaction {
-    uint256 loanId;
-    uint64 repayTimestamp; // 0 for missed loans
-  }
-
-  struct Profile {
-    uint256 blanace;
-    Loan[] loans;
-    uint256 borrowLimit;
-    uint256 reputation;
+    uint64 repayTimestamp; // 0 means loan has not been paid off
   }
   
   mapping (uint256 => Loan) private loans;
   mapping (address => uint256) private balanceOf;
-  mapping (address => uint256[]) private currentLoans; // loans by user
-  mapping (address => uint256[]) private loanHistory;
+  mapping (address => uint256[]) private userLoanIds; // loans by user
 
   address private owner;
   string public name;
@@ -51,6 +39,7 @@ contract Ibcs {
 
   // This generates a public event on the blockchain that will notify clients
   event Transfer(address indexed from, address indexed to, uint256 value);
+
   // This notifies clients about the amount burnt
   event Burn(address indexed from, uint256 value);
   
@@ -113,7 +102,7 @@ contract Ibcs {
   function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
     uint id = loanIndex++;
     loans[id] = Loan(id, amoun, rate, origination, duration, borrower);
-    currentLoans[borrower].;
+    currentLoans[borrower].push(id);
   }
 
   function payBack() {
