@@ -35,7 +35,7 @@ const postBorrowRequest = (data) => {
   // debugger 
   return (
     $.ajax({
-      method: 'POST',
+      method: 'GET',
       url: '/borrow',
       data: data
     })
@@ -44,9 +44,9 @@ const postBorrowRequest = (data) => {
 const payBack = (data) => {
   return (
     $.ajax({
-      method: 'POST',
+      method: 'GET',
       url: '/payBack',
-      data
+      data: data
     })
   );
 };

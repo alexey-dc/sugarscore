@@ -4674,14 +4674,14 @@ var receiveLoans = exports.receiveLoans = function receiveLoans(loans) {
 var postBorrowRequest = function postBorrowRequest(data) {
   // debugger 
   return $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: '/borrow',
     data: data
   });
 };
 var payBack = function payBack(data) {
   return $.ajax({
-    method: 'POST',
+    method: 'GET',
     url: '/payBack',
     data: data
   });
@@ -18751,7 +18751,6 @@ var Borrow = function (_React$Component) {
         durationDays: 30
       };
       this.props.newLoan(loan);
-      // debugger
       // this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
     }
