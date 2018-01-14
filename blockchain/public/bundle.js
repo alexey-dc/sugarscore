@@ -19056,8 +19056,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     getloans: function getloans(address) {
       return dispatch((0, _actions.getLoans)(address));
     },
-    payback: function payback(address, loanId) {
-      return dispatch((0, _actions.paybackLoanOnBlockchain)(loanId));
+    payback: function payback(loanId) {
+      return dispatch((0, _actions.paybackLoan)(loanId));
     }
   };
 };
