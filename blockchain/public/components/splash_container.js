@@ -6,7 +6,7 @@ import values from 'lodash/values';
 const mapStateToProps = (state, ownProps) => {
   let test = 'A User';
   return {
-    ownProps,
+    history: ownProps.history,
     user: test
     // user: values(state.user)
   };

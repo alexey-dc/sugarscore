@@ -1,11 +1,14 @@
 import React from 'react';
 import PaybackListItem from './payback_list_item';
-const Payback = ({loans}) => {
+const Payback = ({loans, payback}) => {
+  // debugger
   let loanList = loans.map((loan) => {
-    return <li><PaybackListItem loan={loan}/></li>;
+    return <PaybackListItem loan={loan} payback={payback}/>;
   });
+  let bankRoll = 1.45;
   return (
     <div>
+      <h1>You have {bankRoll} ETH</h1>
       <ul>
         {loanList}
       </ul>
