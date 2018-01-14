@@ -151,9 +151,15 @@ input[type=number]:focus {
   border: 1px solid rgba(81, 203, 238, 1);
 }
 
+ul#loans {
+  margin: 0 auto;
+  width: 600px;
+}
+
 li.loan-card {
   padding: 10px 10px;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 li.loan-card:hover {
@@ -166,29 +172,32 @@ li.loan-card > h1 {
   display: inline-block;
   border: 1px solid black;
   font-size: 14px;
+  padding: 3px;
 }
 li.loan-card > h2 {
-  
-}
-div.borrow-container {
-  /* background-image: url("https://res.cloudinary.com/eventbike/image/upload/c_scale,q_35,w_1678/v1512048569/joseph-barrientos-49318_gnijyi.jpg"); */
-
+  padding: 4px;
 }
 div.borrow-form-container {
   background: white;
-  width: 400px;
-  height: 800px;
+}
+
+div#background {
+  background-color: rgb(13, 108, 167);
 }
 
 div.borrow-container {
-  margin: 0 auto;
+  margin: 20px auto;
   text-align: center;
+  width: 300px;
+  height: 400px;
+  background-color: white;  
 }
 
 div.borrow-container > h1 {
   font-size: 24px;
   color: blue;
   margin: 20px 5px;
+  padding-top: 40px;
 }
 div.borrow-container h2 {
   text-align: center;
@@ -200,4 +209,5 @@ div#external {
 div#external > a {
   margin: 10px;
 }
+
 
