@@ -1,5 +1,8 @@
-# champions
-API:
+# Sugar Score Credit rating and Reputation system
+
+- stack: Node.js, react, solidity, web3
+
+#API:
   - getProfile(address)
     - coinsIn (int)
     - totalBorrowed (int)
