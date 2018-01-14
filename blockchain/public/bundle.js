@@ -16200,6 +16200,13 @@ var Splash = function (_React$Component) {
     _this.state = { publicKey: '' };
     _this.handlePublicKeyChange = _this.handlePublicKeyChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.style = {
+      "background-color": "rgba(255, 255, 255, 0.4)",
+      "color": "white",
+      "padding": "5px",
+
+      "border-radius": "20px"
+    };
     return _this;
   }
 
@@ -16223,40 +16230,48 @@ var Splash = function (_React$Component) {
         'div',
         { className: 'main-container' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Lorem ipsum slogan lorem ipsum'
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
+          'div',
+          { className: 'hero-image' },
           _react2.default.createElement(
-            'li',
+            'h1',
             null,
-            'Feature one'
+            'Lorem ipsum slogan lorem ipsum'
           ),
           _react2.default.createElement(
-            'li',
+            'ul',
             null,
-            'Feature two'
+            _react2.default.createElement(
+              'li',
+              null,
+              'Feature one'
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              'Feature two'
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              'Feature three'
+            )
           ),
           _react2.default.createElement(
-            'li',
-            null,
-            'Feature three'
+            'div',
+            { className: 'hero-text' },
+            _react2.default.createElement(
+              'form',
+              { className: 'public-key' },
+              _react2.default.createElement(_TextField2.default, {
+                hintText: 'Enter your public key',
+                onChange: this.handlePublicKeyChange,
+                value: this.state.publicKey,
+                name: 'publicKey',
+                type: 'text'
+              }),
+              _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleSubmit, label: 'Get Started' })
+            )
           )
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: 'public-key' },
-          _react2.default.createElement(_TextField2.default, {
-            hintText: 'Enter your public key',
-            onChange: this.handlePublicKeyChange,
-            value: this.state.publicKey,
-            name: 'publicKey',
-            type: 'text'
-          }),
-          _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleSubmit, label: 'Get Started' })
         )
       );
     }
