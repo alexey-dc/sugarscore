@@ -61,14 +61,15 @@ contract Ibcs {
     name = tokenName;
     symbol = tokenSymbol;
   }
-
+/*
   function profile(address user) public returns (Profile profile) {
 
   }
 
-  function currentLoans(address user) public returns (Loan[] loans) {
+  function getCurrentLoans(address user) public returns (Loan[] loans) {
 
   }
+  */
   function borrow() {
 
   }
