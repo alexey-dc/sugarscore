@@ -44,7 +44,7 @@ const payBack = (data) => {
   return (
     $.ajax({
       method: 'POST',
-      url: '/api/',
+      url: '/payBack',
       data
     })
   );
@@ -53,7 +53,7 @@ const fetchLoans = (address) => {
   return (
     $.ajax({
       method: 'GET',
-      url: `/getLoans?address=${address}`
+      url: `/getLoans?address=0x6F54ABC78124EFCB12097ABCDEF`
     })
   );
 };
@@ -61,7 +61,7 @@ const getProfile = (address) => {
   return (
     $.ajax({
       method: 'GET',
-      url: `/getProfile?address=${address}`
+      url: `/getProfile?address=0x6F54ABC78124EFCB12097ABCDEF`
     })
   );
 };

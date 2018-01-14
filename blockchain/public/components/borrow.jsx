@@ -8,6 +8,7 @@ class Borrow extends React.Component {
     this.state = ({borrowAmount: 0});
     this.handleBorrowAmountChange = this.handleBorrowAmountChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.user = this.props.user;
   }
   handleBorrowAmountChange(e) {
     e.preventDefault();
@@ -15,16 +16,23 @@ class Borrow extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+    let newLoan = {
+      address: this.user.address,
+    };
     this.props.newLoan(this.state.borrowAmount);
     this.props.history.push(`/payback`);
   }
-  
+  componentWillReceiveProps(nextProps) {
+    this.user = nextProps.user; 
+  }
+
   render() {
     return (
       <div className="borrow-container">
+      <h1>Borrow Money</h1>
+      <h2>Balance: {this.user ? this.user.coinsIn : 'Loading'}</h2>
         <form className="borrow-form-container">
-          <h1>Borrow Money</h1>
-          <h2>Public key [{this.props.user}]'s credit score is {this.props.creditScore}</h2>
+          <h2>Public key [{this.user ? this.user.address : ''}]'s reputation is {this.user ? this.user.reputation : ''}</h2>
           <input 
             type="number" 
             name="borrowAmount" 

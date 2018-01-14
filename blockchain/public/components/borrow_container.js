@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Borrow from './borrow';
-import { borrowRequest } from './actions';
+import { borrowRequestOnBlockchain } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
   let user = state.currentUser;
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = dispatch => ({
-  newLoan: (loan) => dispatch(borrowRequest(loan))
+  newLoan: (loan) => dispatch(borrowRequestOnBlockchain(loan))
 });
 export default withRouter(connect(
   mapStateToProps,

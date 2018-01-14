@@ -4661,20 +4661,20 @@ var postBorrowRequest = function postBorrowRequest(data) {
 var payBack = function payBack(data) {
   return $.ajax({
     method: 'POST',
-    url: '/api/',
+    url: '/payBack',
     data: data
   });
 };
 var fetchLoans = function fetchLoans(address) {
   return $.ajax({
     method: 'GET',
-    url: '/getLoans?address=' + address
+    url: '/getLoans?address=0x6F54ABC78124EFCB12097ABCDEF'
   });
 };
 var getProfile = function getProfile(address) {
   return $.ajax({
     method: 'GET',
-    url: '/getProfile?address=' + address
+    url: '/getProfile?address=0x6F54ABC78124EFCB12097ABCDEF'
   });
 };
 
@@ -18729,6 +18729,7 @@ var Borrow = function (_React$Component) {
     _this.state = { borrowAmount: 0 };
     _this.handleBorrowAmountChange = _this.handleBorrowAmountChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.user = _this.props.user;
     return _this;
   }
 
@@ -18742,8 +18743,16 @@ var Borrow = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
+      var newLoan = {
+        address: this.user.address
+      };
       this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.user = nextProps.user;
     }
   }, {
     key: 'render',
@@ -18752,20 +18761,26 @@ var Borrow = function (_React$Component) {
         'div',
         { className: 'borrow-container' },
         _react2.default.createElement(
+          'h1',
+          null,
+          'Borrow Money'
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Balance: ',
+          this.user ? this.user.coinsIn : 'Loading'
+        ),
+        _react2.default.createElement(
           'form',
           { className: 'borrow-form-container' },
-          _react2.default.createElement(
-            'h1',
-            null,
-            'Borrow Money'
-          ),
           _react2.default.createElement(
             'h2',
             null,
             'Public key [',
-            this.props.user,
-            ']\'s credit score is ',
-            this.props.creditScore
+            this.user ? this.user.address : '',
+            ']\'s reputation is ',
+            this.user ? this.user.reputation : ''
           ),
           _react2.default.createElement('input', {
             type: 'number',
@@ -18819,7 +18834,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     newLoan: function newLoan(loan) {
-      return dispatch((0, _actions.borrowRequest)(loan));
+      return dispatch((0, _actions.borrowRequestOnBlockchain)(loan));
     }
   };
 };
@@ -19242,7 +19257,7 @@ var Splash = function (_React$Component) {
           _react2.default.createElement(
             'h1',
             { className: 'splash' },
-            'Lorem ipsum slogan lorem ipsum'
+            'Decentralized loans and credit score'
           ),
           _react2.default.createElement(
             'ul',
@@ -19250,17 +19265,17 @@ var Splash = function (_React$Component) {
             _react2.default.createElement(
               'li',
               null,
-              'Feature one'
+              'Take out loans anonymously'
             ),
             _react2.default.createElement(
               'li',
               null,
-              'Feature two'
+              'Build your credit score by interacting with the system'
             ),
             _react2.default.createElement(
               'li',
               null,
-              'Feature three'
+              'Earn money by lending to trusted peers'
             )
           ),
           _react2.default.createElement(
@@ -19394,7 +19409,7 @@ var TopNav = function TopNav() {
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/' },
-        'ChangeCred'
+        'International Blockchain Credit Score'
       )
     ),
     _react2.default.createElement(
