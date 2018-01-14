@@ -33,11 +33,11 @@ class Splash extends React.Component {
     return (
       <div className="main-container">
         <div className="hero-image">
-          <h1 className="splash">Lorem ipsum slogan lorem ipsum</h1>
+          <h1 className="splash">Decentralized loans and credit score</h1>
           <ul className="splash">
-            <li>Feature one</li>
-            <li>Feature two</li>
-            <li>Feature three</li>
+            <li>Take out loans anonymously</li>
+            <li>Build your credit score by interacting with the system</li>
+            <li>Earn money by lending to trusted peers</li>
           </ul>
           <div className="hero-text">
             <form className="public-key">

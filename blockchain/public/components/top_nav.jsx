@@ -13,7 +13,7 @@ const TopNav = () => {
     <nav className="nav-container">
       <div className="brand">
       
-        <Link to="/">ChangeCred</Link>
+        <Link to="/">International Blockchain Credit Score</Link>
       </div>
       <div className="nav-links">
       <ToolbarGroup>
