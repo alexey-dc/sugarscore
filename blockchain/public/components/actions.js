@@ -32,11 +32,12 @@ export const receiveLoans = (loans) => {
 };
 
 const postBorrowRequest = (data) => {
+  // debugger 
   return (
     $.ajax({
       method: 'POST',
       url: '/borrow',
-      data
+      data: data
     })
   );
 };

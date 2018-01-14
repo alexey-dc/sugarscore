@@ -4652,6 +4652,7 @@ var receiveLoans = exports.receiveLoans = function receiveLoans(loans) {
 };
 
 var postBorrowRequest = function postBorrowRequest(data) {
+  // debugger 
   return $.ajax({
     method: 'POST',
     url: '/borrow',
@@ -18750,7 +18751,7 @@ var Borrow = function (_React$Component) {
         durationDays: 30
       };
       this.props.newLoan(loan);
-      debugger;
+      // debugger
       // this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
     }
@@ -18764,37 +18765,41 @@ var Borrow = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'borrow-container' },
+        { id: 'background' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Borrow Money'
-        ),
-        _react2.default.createElement(
-          'h2',
-          null,
-          'Balance: ',
-          this.user ? this.user.coinsIn : 'Loading'
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: 'borrow-form-container' },
+          'div',
+          { className: 'borrow-container' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Borrow Money'
+          ),
           _react2.default.createElement(
             'h2',
             null,
-            'Public key [',
-            this.user ? this.user.address : '',
-            ']\'s reputation is ',
-            this.user ? this.user.reputation : ''
+            'Balance: ',
+            this.user ? this.user.coinsIn : 'Loading'
           ),
-          _react2.default.createElement('input', {
-            type: 'number',
-            name: 'borrowAmount',
-            onChange: this.handleBorrowAmountChange,
-            value: this.state.borrowAmount,
-            placeholder: 'ETH'
-          }),
-          _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleSubmit, primary: true, label: 'Borrow' })
+          _react2.default.createElement(
+            'form',
+            { className: 'borrow-form-container' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              'Public key [',
+              this.user ? this.user.address : '',
+              ']\'s SugarScore is ',
+              this.user ? this.user.reputation : ''
+            ),
+            _react2.default.createElement('input', {
+              type: 'number',
+              name: 'borrowAmount',
+              onChange: this.handleBorrowAmountChange,
+              value: this.state.borrowAmount,
+              placeholder: 'ETH'
+            }),
+            _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleSubmit, primary: true, label: 'Borrow' })
+          )
         )
       );
     }
@@ -18989,7 +18994,7 @@ var Payback = function (_React$Component) {
         ),
         _react2.default.createElement(
           'ul',
-          null,
+          { id: 'loans' },
           loanList
         ),
         _react2.default.createElement(
@@ -19074,6 +19079,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _RaisedButton = __webpack_require__(121);
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PaybackListItem = function PaybackListItem(_ref) {
@@ -19081,35 +19090,31 @@ var PaybackListItem = function PaybackListItem(_ref) {
       payback = _ref.payback;
 
   return _react2.default.createElement(
-    "li",
-    { className: "loan-card" },
+    'li',
+    { className: 'loan-card' },
     _react2.default.createElement(
-      "h1",
+      'h1',
       null,
-      "Loan #",
+      '#',
       loan.loanId
     ),
     _react2.default.createElement(
-      "h2",
+      'h2',
       null,
-      "You owe ",
+      'You owe ',
       loan.paybackAmount,
-      " ETH"
+      ' ETH'
     ),
     _react2.default.createElement(
-      "h2",
+      'h2',
       null,
-      "You have ",
+      'You have ',
       loan.daysRemaining,
-      " days remaining"
+      ' days remaining'
     ),
-    _react2.default.createElement(
-      "button",
-      { onClick: function onClick() {
-          return payback(loan.loanId);
-        } },
-      "Payback"
-    )
+    _react2.default.createElement(_RaisedButton2.default, { onClick: function onClick() {
+        return payback(loan.loanId);
+      }, label: 'Pay back loan' })
   );
 };
 

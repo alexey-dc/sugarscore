@@ -24,7 +24,7 @@ class Payback extends React.Component {
     return (
       <div>
       <h1>You have {} ETH</h1>
-      <ul>
+      <ul id="loans">
         {loanList}
       </ul>
       <div id="external">

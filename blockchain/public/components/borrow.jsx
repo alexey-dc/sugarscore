@@ -23,7 +23,7 @@ class Borrow extends React.Component {
       durationDays: 30
     };
     this.props.newLoan(loan);
-    debugger
+    // debugger
     // this.props.newLoan(this.state.borrowAmount);
     this.props.history.push(`/payback`);
   }
@@ -33,21 +33,22 @@ class Borrow extends React.Component {
 
   render() {
     return (
-      <div className="borrow-container">
-      <h1>Borrow Money</h1>
-      <h2>Balance: {this.user ? this.user.coinsIn : 'Loading'}</h2>
-        <form className="borrow-form-container">
-          <h2>Public key [{this.user ? this.user.address : ''}]'s reputation is {this.user ? this.user.reputation : ''}</h2>
-          <input 
-            type="number" 
-            name="borrowAmount" 
-            onChange={this.handleBorrowAmountChange} 
-            value={this.state.borrowAmount} 
-            placeholder="ETH"
-          />
-          <RaisedButton onClick={this.handleSubmit} primary={true} label="Borrow"/>
-        </form>
-        
+      <div id="background">
+        <div className="borrow-container">
+        <h1>Borrow Money</h1>
+        <h2>Balance: {this.user ? this.user.coinsIn : 'Loading'}</h2>
+          <form className="borrow-form-container">
+            <h2>Public key [{this.user ? this.user.address : ''}]'s SugarScore is {this.user ? this.user.reputation : ''}</h2>
+            <input 
+              type="number" 
+              name="borrowAmount" 
+              onChange={this.handleBorrowAmountChange} 
+              value={this.state.borrowAmount} 
+              placeholder="ETH"
+            />
+            <RaisedButton onClick={this.handleSubmit} primary={true} label="Borrow"/>
+          </form>
+        </div>
       </div>
     );
   }
