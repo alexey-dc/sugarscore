@@ -60,6 +60,7 @@ app.post('/borrow', function(req, res) {
   try{
     contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
       // TODO: support failure
+      console.log("Borrow result: ", result)
       res.send({ success: true });
     });
   } catch (e) {
