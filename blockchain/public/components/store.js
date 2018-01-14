@@ -9,7 +9,12 @@ if (process.env.NODE_ENV !== 'production') {
   middlewares.push(logger);
 }
 
-const configureStore = (preloadedState = {}) => (
+let _defaultState = {
+  currentUser: null
+};
+
+
+const configureStore = (preloadedState = _defaultState) => (
   createStore(
     reducer,
     preloadedState,

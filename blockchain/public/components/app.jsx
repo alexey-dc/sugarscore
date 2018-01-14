@@ -6,8 +6,13 @@ import {
   Link,
   HashRouter
 } from 'react-router-dom';
+import { 
+  AuthRoute, 
+  ProtectedRoute 
+} from './route_util';
 import SplashContainer from './splash_container';
 import BorrowContainer from './borrow_container';
+import PaybackContainer from './payback_container';
 import TopNav from './top_nav';
 
 const App = () => {
@@ -17,7 +22,8 @@ const App = () => {
       <div className="main">
         <Switch>
           <Route exact path="/" component={SplashContainer}/>
-          <Route exact path="/borrow" component={BorrowContainer}/>
+          <ProtectedRoute exact path="/borrow" component={BorrowContainer}/>
+          <ProtectedRoute exact path="/payback" component={PaybackContainer}/>
         </Switch>
       </div>
     </div>

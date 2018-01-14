@@ -14,3 +14,9 @@ export const paybackLoan = (payload) => {
     payload
   };
 };
+export const loginUser = (user) => {
+  return {
+    type: "RECEIVE_USER",
+    user
+  };
+};
