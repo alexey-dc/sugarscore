@@ -18,8 +18,8 @@ app.get('/getProfile', function(req, res) {
     var address = req.query.address;
     var bProfile = contractInstance.getProfile.call(address, web3.eth.accounts[0]);
     var profile = {
-      currentBalance: bProfile[0].toString(),
-      loanSum: bProfile[1].toString(),
+      coinsIn: bProfile[0].toString(),
+      totalBorrowed: bProfile[1].toString(),
       reputation: bProfile[2].toString(),
       borrowLimit: bProfile[3].toString()
     }
@@ -35,15 +35,18 @@ app.get('/getLoans', function(req,res) {
   var unpayedLoans = []
   for(var loanId in unpayedLoanIds) {
     var bLoan = contractInstance.getLoanDetails.call(loanId, web3.eth.accounts[0]);
+    var origination = parseInt(bLoan[2].toString());
+    var duration = parseInt(bLoan[3].toString());
+    var timePassed = new Date() - origination;
+    var daysRemaining = (((((duration - timePassed)/1000)/60)/60)/24)
     var loan = {
-      amount: bLoan[0].toString(),
-      rate: bLoan[0].toString(),
-      origination: bLoan.toString(),
-      duration: bLoan.toString()
-    }
-    unpayedLoans.push(loan)
+      loanId: loanId,
+      paybackAmount: bLoan[0].toString(),
+      daysRemaining: daysRemaining
+    };
+    unpayedLoans.push(loan);
   }
-  res.send(unpayedLoans)
+  res.send(unpayedLoans);
 });
 
 app.post('/borrow', function(req, res) {
@@ -51,22 +54,16 @@ app.post('/borrow', function(req, res) {
   var amount = req.query.amount;
   var ratePercent = req.query.ratePercent;
   var durationDays = req.query.durationDays;
-  var origination = 12;
+  var origination = new Date();
 
-  console.log(address+amount+ratePercent+durationDays+origination);
-
-      try{
-
-        //(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower)
-         contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
-          // res.send();
-          console.log(res);
-        });//contractInstance
-
-      } catch (e) {
-        res.status('400').send(`Failed! ${e}`);
-      }//catch
-
+  try{
+    contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
+      // TODO: support failure
+      res.send({ success: true });
+    });
+  } catch (e) {
+    res.status('400').send(`Failed! ${e}`);
+  }
 });
 
 app.post('/payBack', function(req, res) {
