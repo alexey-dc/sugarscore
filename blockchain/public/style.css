@@ -165,4 +165,12 @@ div.borrow-form-container {
   height: 800px;
 }
 
+div.borrow-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+div.borrow-container > h1 {
+  font-size: 24px;
+}
 

@@ -22,8 +22,8 @@ class Borrow extends React.Component {
       ratePercent: 5,
       durationDays: 30
     };
-    debugger
     this.props.newLoan(loan);
+    debugger
     // this.props.newLoan(this.state.borrowAmount);
     this.props.history.push(`/payback`);
   }

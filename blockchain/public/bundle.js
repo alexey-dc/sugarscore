@@ -18749,8 +18749,8 @@ var Borrow = function (_React$Component) {
         ratePercent: 5,
         durationDays: 30
       };
-      debugger;
       this.props.newLoan(loan);
+      debugger;
       // this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
     }
@@ -18837,6 +18837,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  dispatch((0, _actions.getProfileThunk)(0x6F54ABC78124EFCB12097ABCDEF));
   return {
     newLoan: function newLoan(loan) {
       return dispatch((0, _actions.borrowRequestOnBlockchain)(loan));
