@@ -20,17 +20,14 @@ const reducer = (state = initialState, action) => {
       let amount = action.payload.amount;
       let days = action.payload.days;
       //we need to find a new id for this 
-      let newId = 0;
-      while (true) {
-        if (!state.loans[newId]) {
-          break; 
-        }
-        else {
-          newId += 1;
+      let maxId = 0;
+      for(let i = 0; i < state.loans.length; i++) {
+        if (state.loans.loanId > maxId) {
+          maxId = state.loans.loanId;
         }
       }
       let newLoan = {
-        loanId: newId, 
+        loanId: maxId + 1, 
         paybackAmount: amount,
         days: days
       };

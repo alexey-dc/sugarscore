@@ -14060,16 +14060,14 @@ var reducer = function reducer() {
       var amount = action.payload.amount;
       var days = action.payload.days;
       //we need to find a new id for this 
-      var newId = 0;
-      while (true) {
-        if (!state.loans[newId]) {
-          break;
-        } else {
-          newId += 1;
+      var maxId = 0;
+      for (var i = 0; i < state.loans.length; i++) {
+        if (state.loans.loanId > maxId) {
+          maxId = state.loans.loanId;
         }
       }
       var newLoan = {
-        loanId: newId,
+        loanId: maxId + 1,
         paybackAmount: amount,
         days: days
       };
@@ -14081,8 +14079,8 @@ var reducer = function reducer() {
       var loans = newState.loans;
       var result = [];
       //REALLY slow. In future receive hash of loans instead of array
-      for (var i = 0; i < loans.length; i++) {
-        if (loans[i].loanId !== action.payload) result.push(loans[i]);
+      for (var _i = 0; _i < loans.length; _i++) {
+        if (loans[_i].loanId !== action.payload) result.push(loans[_i]);
       }
       newState.loans = result;
       // delete newState.loans[action.payload];
