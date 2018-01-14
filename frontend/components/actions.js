@@ -1,7 +1,7 @@
 const testAction = (payload) => {
   return {
     type: "RECEIVE_HELLO",
-    payload
+    hellos: payload
   };
 };
 
