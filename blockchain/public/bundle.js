@@ -5455,21 +5455,24 @@ var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
 var RECEIVE_BORROW_REQUEST = exports.RECEIVE_BORROW_REQUEST = 'RECEIVE_BORROW_REQUEST';
 var PAYBACK_LOAN = exports.PAYBACK_LOAN = 'PAYBACK_LOAN';
 
-var borrowRequest = exports.borrowRequest = function borrowRequest(payload) {
+var borrowRequest = exports.borrowRequest = function borrowRequest(amount) {
   return {
-    type: "BORROW_REQUEST",
-    payload: payload
+    type: RECEIVE_BORROW_REQUEST,
+    payload: {
+      amount: amount,
+      days: 30
+    }
   };
 };
 var paybackLoan = exports.paybackLoan = function paybackLoan(payload) {
   return {
-    type: "PAYBACK_LOAN",
+    type: PAYBACK_LOAN,
     payload: payload
   };
 };
 var loginUser = exports.loginUser = function loginUser(user) {
   return {
-    type: "RECEIVE_USER",
+    type: RECEIVE_USER,
     user: user
   };
 };
@@ -13741,9 +13744,16 @@ var Borrow = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var creditScore = 685;
       return _react2.default.createElement(
         'form',
         { className: 'borrow-form-container' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Your credit score is ',
+          creditScore
+        ),
         _react2.default.createElement('input', {
           type: 'number',
           name: 'borrowAmount',
@@ -13896,6 +13906,7 @@ var Payback = function Payback(_ref) {
   var loans = _ref.loans,
       payback = _ref.payback;
 
+  // debugger
   var loanList = loans.map(function (loan) {
     return _react2.default.createElement(_payback_list_item2.default, { loan: loan, payback: payback });
   });
@@ -14035,11 +14046,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //pass loan due date as UNIX time (Date.now())
 
-var initialState = {
-  loanRequests: {
-    '0': { 'amount': 500, 'interest': 0.05, 'due': 1515892648090 }
-  }
-};
+var initialState = {};
 
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -14049,8 +14056,25 @@ var reducer = function reducer() {
   var newState = void 0;
   switch (action.type) {
     case _actions.RECEIVE_BORROW_REQUEST:
-      var newLoan = action.payload;
-      newState = (0, _merge2.default)({}, state.loanRequests, newLoan);
+      newState = Object.assign({}, state);
+      var amount = action.payload.amount;
+      var days = action.payload.days;
+      //we need to find a new id for this 
+      var newId = 0;
+      while (true) {
+        if (!state.loans[newId]) {
+          break;
+        } else {
+          newId += 1;
+        }
+      }
+      var newLoan = {
+        loanId: newId,
+        paybackAmount: amount,
+        days: days
+      };
+      // debugger
+      newState.loans.push(newLoan);
       return newState;
     case _actions.PAYBACK_LOAN:
       newState = Object.assign({}, state);

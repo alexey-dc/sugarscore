@@ -1,6 +1,7 @@
 import React from 'react';
 import PaybackListItem from './payback_list_item';
 const Payback = ({loans, payback}) => {
+  // debugger
   let loanList = loans.map((loan) => {
     return <PaybackListItem loan={loan} payback={payback}/>;
   });

@@ -18,8 +18,10 @@ class Borrow extends React.Component {
     this.props.history.push(`/payback`);
   }
   render() {
+    let creditScore = 685;
     return (
       <form className="borrow-form-container">
+        <h1>Your credit score is {creditScore}</h1>
         <input 
           type="number" 
           name="borrowAmount" 

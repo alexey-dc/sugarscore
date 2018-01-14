@@ -8,9 +8,7 @@ import merge from 'lodash/merge';
 //pass loan due date as UNIX time (Date.now())
 
 const initialState = {
-  loanRequests: {
-    '0': {'amount': 500, 'interest': 0.05, 'due': 1515892648090}
-  }
+  
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,8 +16,26 @@ const reducer = (state = initialState, action) => {
   let newState;
   switch(action.type) {
     case RECEIVE_BORROW_REQUEST:
-      let newLoan = action.payload;
-      newState = merge({}, state.loanRequests, newLoan);
+      newState = Object.assign({}, state); 
+      let amount = action.payload.amount;
+      let days = action.payload.days;
+      //we need to find a new id for this 
+      let newId = 0;
+      while (true) {
+        if (!state.loans[newId]) {
+          break; 
+        }
+        else {
+          newId += 1;
+        }
+      }
+      let newLoan = {
+        loanId: newId, 
+        paybackAmount: amount,
+        days: days
+      };
+      // debugger
+      newState.loans.push(newLoan);
       return newState;
     case PAYBACK_LOAN:
       newState = Object.assign({}, state); 
