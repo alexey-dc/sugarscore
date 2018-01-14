@@ -13892,14 +13892,11 @@ var _payback_list_item2 = _interopRequireDefault(_payback_list_item);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Payback = function Payback(_ref) {
-  var loans = _ref.loans;
+  var loans = _ref.loans,
+      payback = _ref.payback;
 
   var loanList = loans.map(function (loan) {
-    return _react2.default.createElement(
-      'li',
-      null,
-      _react2.default.createElement(_payback_list_item2.default, { loan: loan })
-    );
+    return _react2.default.createElement(_payback_list_item2.default, { loan: loan, loanId: 0, payback: payback });
   });
   return _react2.default.createElement(
     'div',
@@ -13933,6 +13930,8 @@ var _payback = __webpack_require__(156);
 
 var _payback2 = _interopRequireDefault(_payback);
 
+var _actions = __webpack_require__(53);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
@@ -13942,7 +13941,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    payback: function payback(loanId) {
+      return dispatch((0, _actions.paybackLoan)(loanId));
+    }
+  };
 };
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_payback2.default));
 
@@ -13964,12 +13967,25 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PaybackListItem = function PaybackListItem(_ref) {
-  var loan = _ref.loan;
+  var loan = _ref.loan,
+      loanId = _ref.loanId,
+      payback = _ref.payback;
 
   return _react2.default.createElement(
-    'h1',
+    'li',
     null,
-    loan
+    _react2.default.createElement(
+      'h1',
+      null,
+      loan
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return payback(loanId);
+        } },
+      'Payback'
+    )
   );
 };
 

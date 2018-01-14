@@ -1,8 +1,11 @@
 import React from 'react';
 
-const PaybackListItem = ({loan}) => {
+const PaybackListItem = ({loan, loanId, payback}) => {
   return (
-    <h1>{loan}</h1>
+    <li>
+      <h1>{loan}</h1>
+      <button onClick={() => payback(loanId)}>Payback</button>
+    </li>
   );
 };
 
