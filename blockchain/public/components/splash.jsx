@@ -13,7 +13,7 @@ class Splash extends React.Component {
     this.setState({publicKey:e.target.value});
   }
   handleSubmit(e) {
-    e.preventDefault();
+    // e.preventDefault();
     this.props.login(this.state.publicKey);
   }
   render() {

@@ -13626,14 +13626,138 @@ module.exports = __webpack_require__(283);
 
 /***/ }),
 /* 152 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: Unexpected token (24:1)\n\n\u001b[0m \u001b[90m 22 | \u001b[39m      \u001b[33m<\u001b[39m\u001b[33mdiv\u001b[39m className\u001b[33m=\u001b[39m\u001b[32m\"main\"\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 23 | \u001b[39m        \u001b[33m<\u001b[39m\u001b[33mSwitch\u001b[39m\u001b[33m>\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 24 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 25 | \u001b[39m          \u001b[33m<\u001b[39m\u001b[33mRoute\u001b[39m exact path\u001b[33m=\u001b[39m\u001b[32m\"/\"\u001b[39m component\u001b[33m=\u001b[39m{\u001b[33mSplashContainer\u001b[39m}\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 26 | \u001b[39m          \u001b[33m<\u001b[39m\u001b[33mProtectedRoute\u001b[39m exact path\u001b[33m=\u001b[39m\u001b[32m\"/borrow\"\u001b[39m component\u001b[33m=\u001b[39m{\u001b[33mBorrowContainer\u001b[39m}\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 27 | \u001b[39m          \u001b[33m<\u001b[39m\u001b[33mProtectedRoute\u001b[39m exact path\u001b[33m=\u001b[39m\u001b[32m\"/payback\"\u001b[39m component\u001b[33m=\u001b[39m{\u001b[33mPaybackContainer\u001b[39m}\u001b[33m/\u001b[39m\u001b[33m>\u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _route_util = __webpack_require__(160);
+
+var _splash_container = __webpack_require__(162);
+
+var _splash_container2 = _interopRequireDefault(_splash_container);
+
+var _borrow_container = __webpack_require__(154);
+
+var _borrow_container2 = _interopRequireDefault(_borrow_container);
+
+var _payback_container = __webpack_require__(157);
+
+var _payback_container2 = _interopRequireDefault(_payback_container);
+
+var _top_nav = __webpack_require__(163);
+
+var _top_nav2 = _interopRequireDefault(_top_nav);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var App = function App() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _top_nav2.default }),
+    _react2.default.createElement(
+      'div',
+      { className: 'main' },
+      _react2.default.createElement(
+        _reactRouterDom.Switch,
+        null,
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash_container2.default }),
+        _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/borrow', component: _borrow_container2.default }),
+        _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/payback', component: _payback_container2.default })
+      )
+    )
+  );
+};
+
+exports.default = App;
 
 /***/ }),
-/* 153 */,
-/* 154 */,
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Borrow = function Borrow(_ref) {
+  var borrow_amount = _ref.borrow_amount;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: '/payback' },
+      _react2.default.createElement(
+        'button',
+        null,
+        'Borrow ',
+        borrow_amount,
+        ' ETH'
+      )
+    )
+  );
+};
+
+exports.default = Borrow;
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(34);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _borrow = __webpack_require__(153);
+
+var _borrow2 = _interopRequireDefault(_borrow);
+
+var _actions = __webpack_require__(53);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var test = '103';
+  return {
+    borrow_amount: test
+  };
+};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_borrow2.default));
+
+/***/ }),
 /* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13659,35 +13783,35 @@ var _store2 = _interopRequireDefault(_store);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch('../candidates').then(function (res) {
-    return res.json();
-  }).then(function (res) {
-    var candidatesTableHTML = res.candidates.map(function (candidate) {
-      return '<tr><td>' + candidate.name + '</td><td id=\'' + candidate.name + '\'>' + candidate.votes + '</td></tr>';
-    });
+  // fetch('../candidates')
+  // .then(res => res.json())
+  // .then(res => {
+  //   const candidatesTableHTML = res.candidates.map(function(candidate) {
+  //     return `<tr><td>${candidate.name}</td><td id='${candidate.name}'>${candidate.votes}</td></tr>`;
+  //   });
 
-    $('#candidatesTable').html(candidatesTableHTML);
-  }).catch(function (err) {
-    // Error :(
-  });
+  //   $('#candidatesTable').html(candidatesTableHTML);
+  // }).catch(function(err) {
+  //   // Error :(
+  // });
 
-  $('#voteSubmit').click(function (event) {
-    var headers = new Headers({
-      "Content-Type": "application/json"
-    });
+  // $('#voteSubmit').click(function(event) {
+  //   const headers = new Headers({
+  //     "Content-Type": "application/json",
+  //   });
 
-    fetch('/vote', {
-      method: 'post',
-      headers: headers,
-      body: JSON.stringify({ candidateName: $('#candidateName').val() })
-    }).then(function (res) {
-      return res.json();
-    }).then(function (res) {
-      $('#' + res.name).html(res.votes);
-    }).catch(function () {
-      // Error
-    });
-  });
+  //   fetch('/vote', {
+  //     method: 'post',
+  //     headers: headers,
+  //     body: JSON.stringify({ candidateName: $('#candidateName').val() }),
+  //   })
+  //   .then(res => res.json())
+  //   .then(res => {
+  //     $('#' + res.name).html(res.votes);
+  //   }).catch(function() {
+  //     // Error
+  //   });
+  // });
   var rootEl = document.getElementById('root');
   var store = void 0;
   if (window.currentUser) {
@@ -13702,9 +13826,111 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /***/ }),
-/* 156 */,
-/* 157 */,
-/* 158 */,
+/* 156 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _payback_list_item = __webpack_require__(158);
+
+var _payback_list_item2 = _interopRequireDefault(_payback_list_item);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Payback = function Payback(_ref) {
+  var loans = _ref.loans;
+
+  var loanList = loans.map(function (loan) {
+    return _react2.default.createElement(
+      'li',
+      null,
+      _react2.default.createElement(_payback_list_item2.default, { loan: loan })
+    );
+  });
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'ul',
+      null,
+      loanList
+    )
+  );
+};
+
+exports.default = Payback;
+
+/***/ }),
+/* 157 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(34);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _payback = __webpack_require__(156);
+
+var _payback2 = _interopRequireDefault(_payback);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var loans = ['loan1', 'loan2', 'loan3'];
+  return {
+    loans: loans
+  };
+};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_payback2.default));
+
+/***/ }),
+/* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PaybackListItem = function PaybackListItem(_ref) {
+  var loan = _ref.loan;
+
+  return _react2.default.createElement(
+    'h1',
+    null,
+    loan
+  );
+};
+
+exports.default = PaybackListItem;
+
+/***/ }),
 /* 159 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13754,10 +13980,230 @@ var reducer = function reducer() {
 exports.default = reducer;
 
 /***/ }),
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
+/* 160 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProtectedRoute = exports.AuthRoute = undefined;
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(34);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Auth = function Auth(_ref) {
+  var Component = _ref.component,
+      path = _ref.path,
+      loggedIn = _ref.loggedIn;
+  return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
+      return !loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+    } });
+};
+
+var Protected = function Protected(_ref2) {
+  var Component = _ref2.component,
+      path = _ref2.path,
+      loggedIn = _ref2.loggedIn;
+  return _react2.default.createElement(_reactRouterDom.Route, { path: path, render: function render(props) {
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
+      );
+    } });
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return { loggedIn: Boolean(state.currentUser) };
+};
+
+var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Auth));
+var ProtectedRoute = exports.ProtectedRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Protected));
+
+/***/ }),
+/* 161 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Splash = function (_React$Component) {
+  _inherits(Splash, _React$Component);
+
+  function Splash(props) {
+    _classCallCheck(this, Splash);
+
+    var _this = _possibleConstructorReturn(this, (Splash.__proto__ || Object.getPrototypeOf(Splash)).call(this, props));
+
+    _this.state = { publicKey: '' };
+    _this.handlePublicKeyChange = _this.handlePublicKeyChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit(_this);
+    return _this;
+  }
+
+  _createClass(Splash, [{
+    key: 'handlePublicKeyChange',
+    value: function handlePublicKeyChange(e) {
+      e.preventDefault();
+      this.setState({ publicKey: e.target.value });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      // e.preventDefault();
+      this.props.login(this.state.publicKey);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
+        _react2.default.createElement('input', {
+          type: 'text',
+          name: 'publicKey',
+          onChange: this.handlePublicKeyChange,
+          value: this.state.publicKey,
+          placeholder: 'Enter your public key'
+        }),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleSubmit },
+          'Submit'
+        )
+      );
+    }
+  }]);
+
+  return Splash;
+}(_react2.default.Component);
+
+exports.default = Splash;
+
+/***/ }),
+/* 162 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(34);
+
+var _reactRouterDom = __webpack_require__(18);
+
+var _splash = __webpack_require__(161);
+
+var _splash2 = _interopRequireDefault(_splash);
+
+var _actions = __webpack_require__(53);
+
+var _values = __webpack_require__(265);
+
+var _values2 = _interopRequireDefault(_values);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var test = 'A User';
+  return {
+    ownProps: ownProps,
+    user: test
+    // user: values(state.user)
+  };
+};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    // getUser: () => dispatch(getEvents())
+    login: function login(user) {
+      return dispatch((0, _actions.loginUser)(user));
+    }
+  };
+};
+
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_splash2.default));
+
+/***/ }),
+/* 163 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(18);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var TopNav = function TopNav() {
+  return _react2.default.createElement(
+    'nav',
+    { className: 'nav-container' },
+    _react2.default.createElement(
+      'div',
+      { className: 'brand' },
+      'ChangeCred'
+    ),
+    _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/borrow' },
+        'Borrow'
+      ),
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/payback' },
+        'Payback'
+      )
+    )
+  );
+};
+
+exports.default = TopNav;
+
+/***/ }),
 /* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17409,7 +17855,33 @@ module.exports = apply;
 
 
 /***/ }),
-/* 200 */,
+/* 200 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
 /* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17645,7 +18117,42 @@ module.exports = baseIsTypedArray;
 
 
 /***/ }),
-/* 207 */,
+/* 207 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(61),
+    nativeKeys = __webpack_require__(245);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
 /* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17928,7 +18435,31 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 215 */,
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(200);
+
+/**
+ * The base implementation of `_.values` and `_.valuesIn` which creates an
+ * array of `object` property values corresponding to the property names
+ * of `props`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array} props The property names to get values for.
+ * @returns {Object} Returns the array of property values.
+ */
+function baseValues(object, props) {
+  return arrayMap(props, function(key) {
+    return object[key];
+  });
+}
+
+module.exports = baseValues;
+
+
+/***/ }),
 /* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -18751,7 +19282,18 @@ module.exports = mapCacheSet;
 
 
 /***/ }),
-/* 245 */,
+/* 245 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(99);
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
 /* 246 */
 /***/ (function(module, exports) {
 
@@ -19236,7 +19778,49 @@ module.exports = isPlainObject;
 
 
 /***/ }),
-/* 261 */,
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(93),
+    baseKeys = __webpack_require__(207),
+    isArrayLike = __webpack_require__(43);
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
+
+
+/***/ }),
 /* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19344,7 +19928,46 @@ module.exports = toPlainObject;
 
 
 /***/ }),
-/* 265 */,
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseValues = __webpack_require__(215),
+    keys = __webpack_require__(261);
+
+/**
+ * Creates an array of the own enumerable string keyed property values of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property values.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.values(new Foo);
+ * // => [1, 2] (iteration order is not guaranteed)
+ *
+ * _.values('hi');
+ * // => ['h', 'i']
+ */
+function values(object) {
+  return object == null ? [] : baseValues(object, keys(object));
+}
+
+module.exports = values;
+
+
+/***/ }),
 /* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
