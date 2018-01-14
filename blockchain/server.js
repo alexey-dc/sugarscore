@@ -13,13 +13,14 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + 'public/index.html'));
 });
 
-app.post('/vote', function (req, res) {
+app.post('/payBackMoney', function (req, res) {
   try {
-    const candidateName = req.body.candidateName.trim();
+    const ammount = req.body.ammount.trim();
 
-    contractInstance.voteForCandidate(candidateName, { from: web3.eth.accounts[0] }, function(result) {
-      const totalVotes = contractInstance.totalVotesFor.call(candidateName, { from: web3.eth.accounts[0] }).toString();
-      res.send({ votes: totalVotes, name: candidateName });
+    contractInstance.payBack(ammount, { from: web3.eth.accounts[0] }, function(result) {
+
+    //  const totalVotes = contractInstance.totalVotesFor.call(candidateName, { from: web3.eth.accounts[0] }).toString();
+    //  res.send({ votes: totalVotes, name: candidateName });
     });
   } catch (e) {
     res.status('400').send(`Failed! ${e}`);
@@ -37,6 +38,22 @@ app.get('/candidates', function(req, res) {
     });
 
     res.send({ candidates: candidateVotes });
+  } catch (e) {
+    res.status('400').send(`Failed! ${e}`);
+  }
+});
+
+
+app.get('/wallet_total', function(req, res) {
+  try {
+
+     const candidate = 0;
+     const totalwallet = contractInstance.get_wallet_balance.call(candidate, { from: web3.eth.accounts[0] }).toString();
+
+
+
+    //res.send({ candidates: candidateVotes });
+    res.send({ total_amount_wallet: totalwallet });
   } catch (e) {
     res.status('400').send(`Failed! ${e}`);
   }

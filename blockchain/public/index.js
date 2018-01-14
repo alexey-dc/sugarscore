@@ -1,4 +1,14 @@
 $(document).ready(function() {
+
+  fetch('/wallet_total')
+    .then(res => res.json())
+    .then(res => {
+
+      alert(JSON.stringify(res));
+    }).catch(function(err) {
+      // Error :(
+    });//fetch
+
   fetch('/candidates')
   .then(res => res.json())
   .then(res => {
@@ -14,15 +24,15 @@ $(document).ready(function() {
   $('#pay_back_currency').click(function(event) {
 
     alert('Thanks for paying back '+  $('#payback_ammount').val() +" ETH");
-    
+
     const headers = new Headers({
       "Content-Type": "application/json",
     });
 
-        fetch('/vote', {
+        fetch('/payBackMoney', {
           method: 'post',
           headers: headers,
-          body: JSON.stringify({ candidateName: $('#candidateName').val() }),
+          body: JSON.stringify({ ammount: $('#payback_ammount').val() }),
         })
         .then(res => res.json())
         .then(res => {

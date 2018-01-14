@@ -37,7 +37,7 @@ contract Ibcs {
     uint256 borrowLimit;
     uint256 reputation;
   }
-  
+
   mapping (uint256 => Loan) private loans;
   mapping (address => uint256) private balanceOf;
   mapping (address => uint256[]) private currentLoans;
@@ -48,12 +48,13 @@ contract Ibcs {
   string public symbol;
   uint8 public decimals = 18;
   uint256 public totalSupply;
+  uint256 public your_wallet_balance = 50 ;
 
   // This generates a public event on the blockchain that will notify clients
   event Transfer(address indexed from, address indexed to, uint256 value);
   // This notifies clients about the amount burnt
   event Burn(address indexed from, uint256 value);
-  
+
   function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
     totalSupply = initialSupply * 10 ** uint256(decimals);
     owner = msg.sender;
@@ -70,11 +71,22 @@ contract Ibcs {
 
   }
   */
+
+
   function borrow() {
 
   }
-  function payBack() {
-    
+
+  function payBack(uint256 amount) {
+
+
+
+  }//payBack
+
+
+  function get_wallet_balance(uint256 candidate) returns (uint256) {
+
+  return your_wallet_balance;
   }
 
 }
