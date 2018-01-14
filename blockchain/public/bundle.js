@@ -18935,6 +18935,10 @@ var _payback_list_item = __webpack_require__(249);
 
 var _payback_list_item2 = _interopRequireDefault(_payback_list_item);
 
+var _RaisedButton = __webpack_require__(121);
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18987,6 +18991,20 @@ var Payback = function (_React$Component) {
           'ul',
           null,
           loanList
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'external' },
+          _react2.default.createElement(
+            'a',
+            { href: 'https://www.propy.com' },
+            _react2.default.createElement(_RaisedButton2.default, { label: 'Get a mortgage for your house on propy.com!', secondary: true })
+          ),
+          _react2.default.createElement(
+            'a',
+            { href: 'https://usa.visa.com/pay-with-visa/find-card/' },
+            _react2.default.createElement(_RaisedButton2.default, { label: 'Instantly get a credit card', secondary: true })
+          )
         )
       );
     }
@@ -19454,7 +19472,7 @@ var TopNav = function TopNav() {
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/' },
-        'International Blockchain Credit Score'
+        'Sugar'
       )
     ),
     _react2.default.createElement(

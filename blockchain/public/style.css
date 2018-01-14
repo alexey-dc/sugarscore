@@ -58,6 +58,11 @@ input[type="submit"] {
   color: green;
 }
 
+div.brand {
+  font-family: 'Joti One', cursive;
+  font-size: 35px;
+}
+
 nav.nav-container {
   display: flex;
   justify-content: space-between;
@@ -93,6 +98,9 @@ div.nav-links > a {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  font-size: 23px;
+  text-shadow: 2px 2px #000000;
+
 }
 
 
@@ -100,8 +108,10 @@ h1.splash {
   position: absolute;
   top: 20%;
   left: 20%;
-  font-size: 24px;
+  font-size: 34px;
   color: white;
+  text-shadow: 1px 1px #000000;
+
 }
 
 ul.splash {
@@ -112,8 +122,13 @@ ul.splash {
   justify-content: right;
   flex-direction: column;
   color: white;
+  padding: 5px;
 }
 
+ul.splash > li {
+  padding: 5px;
+  font-size: 20px;
+}
 
 
 input[type=number] {
@@ -172,5 +187,17 @@ div.borrow-container {
 
 div.borrow-container > h1 {
   font-size: 24px;
+  color: blue;
+  margin: 20px 5px;
+}
+div.borrow-container h2 {
+  text-align: center;
+  margin: 10px 10px;
+}
+div#external {
+  margin: 40px 40px;
+}
+div#external > a {
+  margin: 10px;
 }
 

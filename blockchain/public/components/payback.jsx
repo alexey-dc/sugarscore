@@ -1,5 +1,7 @@
 import React from 'react';
 import PaybackListItem from './payback_list_item';
+import RaisedButton from 'material-ui/RaisedButton';
+
 class Payback extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +27,10 @@ class Payback extends React.Component {
       <ul>
         {loanList}
       </ul>
+      <div id="external">
+        <a href="https://www.propy.com"><RaisedButton label="Get a mortgage for your house on propy.com!" secondary={true} /></a>
+        <a href="https://usa.visa.com/pay-with-visa/find-card/"><RaisedButton label="Instantly get a credit card" secondary={true}/></a>
+      </div>
     </div>
     );
   }
