@@ -4621,6 +4621,7 @@ Object.defineProperty(exports, "__esModule", {
 var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
 var RECEIVE_BORROW_REQUEST = exports.RECEIVE_BORROW_REQUEST = 'RECEIVE_BORROW_REQUEST';
 var PAYBACK_LOAN = exports.PAYBACK_LOAN = 'PAYBACK_LOAN';
+var RECEIVE_LOANS = exports.RECEIVE_LOANS = 'RECEIVE_LOANS';
 
 var borrowRequest = exports.borrowRequest = function borrowRequest(amount) {
   return {
@@ -4641,6 +4642,69 @@ var loginUser = exports.loginUser = function loginUser(user) {
   return {
     type: RECEIVE_USER,
     user: user
+  };
+};
+var receiveLoans = exports.receiveLoans = function receiveLoans(loans) {
+  return {
+    type: RECEIVE_LOANS,
+    loans: loans
+  };
+};
+
+var postBorrowRequest = function postBorrowRequest(data) {
+  return $.ajax({
+    method: 'POST',
+    url: '/borrow',
+    data: data
+  });
+};
+var payBack = function payBack(data) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/',
+    data: data
+  });
+};
+var fetchLoans = function fetchLoans(address) {
+  return $.ajax({
+    method: 'GET',
+    url: '/getLoans?address=' + address
+  });
+};
+var getProfile = function getProfile(address) {
+  return $.ajax({
+    method: 'GET',
+    url: '/getProfile?address=' + address
+  });
+};
+
+var borrowRequestOnBlockchain = exports.borrowRequestOnBlockchain = function borrowRequestOnBlockchain(data) {
+  return function (dispatch) {
+    return postBorrowRequest(data).then(function (res) {
+      return dispatch(borrowRequest(res));
+    });
+  };
+};
+
+var paybackLoanOnBlockchain = exports.paybackLoanOnBlockchain = function paybackLoanOnBlockchain(data) {
+  return function (dispatch) {
+    return payBack(data).then(function (res) {
+      return dispatch(paybackLoan(res));
+    });
+  };
+};
+var getLoans = exports.getLoans = function getLoans(data) {
+  return function (dispatch) {
+    return fetchLoans(data).then(function (res) {
+      return dispatch(receiveLoans(res));
+    });
+  };
+};
+var getProfileThunk = exports.getProfileThunk = function getProfileThunk(address) {
+  return function (dispatch) {
+    return getProfile(address).then(function (res) {
+      return dispatch(loginUser(res));
+    });
   };
 };
 
@@ -19163,6 +19227,7 @@ var Splash = function (_React$Component) {
     value: function handleSubmit(e) {
       // e.preventDefault();
       this.props.login(this.state.publicKey);
+
       this.props.history.push('/borrow');
     }
   }, {
