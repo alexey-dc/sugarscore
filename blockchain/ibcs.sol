@@ -1,19 +1,5 @@
 // We have to specify what version of compiler this code will compile with
 pragma solidity ^0.4.11;
-  // - getProfile(address)
-  //   - coinsIn (int)
-  //   - totalBorrowed (int)
-  //   - borrowLimit (int)
-  //   - reputation (int)
-  // - getLoans
-  //   - loans (array)
-  //     [
-  //       - loanId (int)
-  //       - paybackAmount (int)
-  //       - daysRemaining (int)
-  //     ]
-  // - borrow(address, amount, ratePercent, durationDays)
-  // - payBack(address, loanId)
 
 contract Ibcs {
   uint256 loanIndex = 0;
@@ -36,12 +22,6 @@ contract Ibcs {
   string public symbol;
   uint8 public decimals = 18;
   uint256 public totalSupply;
-
-  // This generates a public event on the blockchain that will notify clients
-  event Transfer(address indexed from, address indexed to, uint256 value);
-
-  // This notifies clients about the amount burnt
-  event Burn(address indexed from, uint256 value);
   
   function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
     totalSupply = initialSupply * 10 ** uint256(decimals);
@@ -50,8 +30,8 @@ contract Ibcs {
     name = tokenName;
     symbol = tokenSymbol;
   }
-/*
-  function profile(address user) public returns (uint256 balance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
+
+  function getProfile(address user) public returns (uint256 balance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
     balance = balanceOf[user];
     loanSum = getLoanSum(user);
     reputation = getReputation(user);
@@ -59,46 +39,40 @@ contract Ibcs {
     return (balance, loanSum, reputation, borrowLimit);
   }
   function getReputation(address user) private returns (uint256 result) {
-    LoanTransaction[] storage history = loanHistory[user];
-    result = 0;
-    for(uint256 i = 0; i < history.length; i++) {
-      LoanTransaction storage entry = history[i];
-      if(entry.repayTimestamp == 0) {
-        result = 0;
-        break;
-      }
-      Loan storage loan = loans[entry.loanId];
-      result += loan.amount/2;
-    }
-    return result;
+    return balanceOf[user];
   }
   function getBorrowLimit(uint256 reputation) private returns (uint256 limit) {
-    limit = reputation;
-    return limit;
+    return reputation;
   }
   function getLoanSum(address user) private returns (uint256 loanSum) {
-    uint256[] storage loanIds = currentLoans[user];
+    uint256[] storage loanIds = userLoanIds[user];
     loanSum = 0;
     for(uint256 i = 0; i < loanIds.length; i++) {
       Loan storage loan = loans[loanIds[i]];
-      loanSum += loan.amount;
+      if(loan.repayTimestamp == 0)
+        loanSum += loan.amount;
     }
     return loanSum;
   }
+
   function getUnpayedLoanIds(address user) public returns (uint256[] loanIds) {
-    uint256[] storage storageLoanIds = currentLoans[user];
-    loanIds = new uint256[storageLoanIds.length];
+    uint256[] storage storageLoanIds = userLoanIds[user];
+    return storageLoanIds;
+    uint256[] storage unpayedLoanIds;
     for(uint256 i = 0; i< storageLoanIds.length; i++) {
-      loanIds[i] = storageLoanIds[i];
+      if(loans[storageLoanIds[i]].repayTimestamp == 0) {
+        unpayedLoanIds.push(storageLoanIds[i]);
+      }
     }
-    return loanIds;
+    return unpayedLoanIds;
   }
+
   function getLoanDetails(uint256 loanId) public returns (uint256 amount, uint64 rate, uint64 origination, uint64 duration) {
     Loan storage loan = loans[loanId];
     return (loan.amount, loan.rate, loan.origination, loan.duration);
   }
-*/
 
+/*
   function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
     if (balance[borrower] >= amount) {
       uint256 id = loanIndex++;
@@ -112,5 +86,5 @@ contract Ibcs {
     loans[id].repayTimestamp = repayTimestamp;
     balance[borrower] = balance[borrower] + loans[id].amount;
   }
-
+*/
 }
