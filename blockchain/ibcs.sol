@@ -82,7 +82,6 @@ contract Ibcs {
       balance[borrower] = balance[borrower] - amount;
       return id;
     }
-    return -1;
   }
 
   function payBack(address borrower, uint id, uint64 repayTimestamp) {
