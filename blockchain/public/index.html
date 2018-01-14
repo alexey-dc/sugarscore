@@ -20,10 +20,12 @@
     <h2 class="current_in_security_hold"> Current ETH in security hold : 6 (Borrowing max: 5) </h2>
     <h2 class="current_eth"> Current ETH in wallet : 25
       <span >
-        <button type="button" class="btn btn-primary" id="voteSubmit">Widthdraw</button>
+
+            <input placeholder="ethereum address here to Widthdraw" type="text" class="form-control" id="Widthdraw_id" name="borrow_money" />
+          <button type="button" class="btn btn-primary" id="voteSubmit">Widthdraw</button>
       </span>
      </h2>
-    <h2 class="wallet_address">your holding address: 0xda06ccee4d31a1ec671d4e467db17d356dd8d554</h2>
+    <h2 class="wallet_address">your online wallet address: 0xda06ccee4d31a1ec671d4e467db17d356dd8d554</h2>
 
     <div class="table-responsive">
       <table class="table table-bordered">
@@ -64,17 +66,35 @@
         </tbody>
       </table>
     </div>
+            <div class="row">
+              <div class="col-lg-2">Pay Back Eth</div>
+              <div class="col-lg-5">
+                <div class="input-group  input-group-sm">
+                  <input placeholder="How much ETH do you want to repay?" type="text" class="form-control" id="candidateName" name="candidateName" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" id="voteSubmit">Pay Back Currency</button>
+                  </span>
+                </div>
+            </div>
+            </div>
+
+            <div class="row">
+<div class="col-lg-2">    </div>
+            </div>
+
     <div class="row">
-      <div class="col-lg-1">Pay Back Eth</div>
-      <div class="col-lg-5">
-        <div class="input-group  input-group-sm">
-          <input type="text" class="form-control" id="candidateName" name="candidateName" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-primary" id="voteSubmit">Pay Back Currency</button>
-          </span>
+            <div class="col-lg-2">Borrow Eth</div>
+            <div class="col-lg-5">
+            <div class="input-group  input-group-sm">
+              <input placeholder="How much ETH do you want to borrow?" type="text" class="form-control" id="candidateName" name="borrow_money" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-primary" id="voteSubmit">Borrow Currency</button>
+              </span>
+            </div>
+            </div>
         </div>
+
     </div>
-    </div>
-  </div>
+
 </body>
 </html>
