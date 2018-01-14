@@ -96,7 +96,7 @@ div.nav-links > a {
 }
 
 
-h1 {
+h1.splash {
   position: absolute;
   top: 20%;
   left: 20%;
@@ -104,7 +104,7 @@ h1 {
   color: white;
 }
 
-ul {
+ul.splash {
   position: absolute;
   top: 30%;
   left: 30%;
@@ -113,28 +113,28 @@ ul {
   flex-direction: column;
   color: white;
 }
-.hero-text > ul {
-  text-align: right;
-}
 
 
-/* input[type=text], input[type=number] {
+
+input[type=number] {
+  width: 50px;
   -webkit-transition: all 0.30s ease-in-out;
   -moz-transition: all 0.30s ease-in-out;
   -ms-transition: all 0.30s ease-in-out;
   -o-transition: all 0.30s ease-in-out;
   outline: none;
   padding: 3px 0px 3px 3px;
-  margin: 5px 1px 3px 0px;
+  margin: 5px 1px 13px 10px;
+  margin: 10px;
   border: 1px solid #DDDDDD;
 }
  
-input[type=text]:focus, input[type=number]:focus {
+input[type=number]:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
   padding: 3px 0px 3px 3px;
   margin: 5px 1px 3px 0px;
   border: 1px solid rgba(81, 203, 238, 1);
-} */
+}
 
 li.loan-card {
   padding: 10px 10px;
@@ -154,6 +154,15 @@ li.loan-card > h1 {
 }
 li.loan-card > h2 {
   
+}
+div.borrow-container {
+  /* background-image: url("https://res.cloudinary.com/eventbike/image/upload/c_scale,q_35,w_1678/v1512048569/joseph-barrientos-49318_gnijyi.jpg"); */
+
+}
+div.borrow-form-container {
+  background: white;
+  width: 400px;
+  height: 800px;
 }
 
 

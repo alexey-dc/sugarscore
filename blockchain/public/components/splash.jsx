@@ -31,8 +31,8 @@ class Splash extends React.Component {
     return (
       <div className="main-container">
         <div className="hero-image">
-          <h1>Lorem ipsum slogan lorem ipsum</h1>
-          <ul>
+          <h1 className="splash">Lorem ipsum slogan lorem ipsum</h1>
+          <ul className="splash">
             <li>Feature one</li>
             <li>Feature two</li>
             <li>Feature three</li>

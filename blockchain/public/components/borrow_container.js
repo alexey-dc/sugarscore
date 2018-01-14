@@ -4,9 +4,11 @@ import Borrow from './borrow';
 import { borrowRequest } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
-  let test = '103';
+  let user = state.currentUser;
+  let creditScore = state.creditScore;
   return {
-    borrow_amount: test
+    user, 
+    creditScore
   };
 };
 const mapDispatchToProps = dispatch => ({

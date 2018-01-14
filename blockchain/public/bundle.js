@@ -15628,6 +15628,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var _defaultState = {
   currentUser: null,
+  creditScore: 0,
   loans: [{ loanId: 0, paybackAmount: 5, daysRemaining: 10 }, { loanId: 1, paybackAmount: 1, daysRemaining: 12 }, { loanId: 2, paybackAmount: 1.5, daysRemaining: 18 }]
 };
 
@@ -15717,6 +15718,10 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(24);
 
+var _RaisedButton = __webpack_require__(412);
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -15755,27 +15760,33 @@ var Borrow = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var creditScore = 685;
       return _react2.default.createElement(
-        'form',
-        { className: 'borrow-form-container' },
+        'div',
+        { className: 'borrow-container' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Your credit score is ',
-          creditScore
-        ),
-        _react2.default.createElement('input', {
-          type: 'number',
-          name: 'borrowAmount',
-          onChange: this.handleBorrowAmountChange,
-          value: this.state.borrowAmount,
-          placeholder: 'ETH'
-        }),
-        _react2.default.createElement(
-          'button',
-          { onClick: this.handleSubmit },
-          'Submit'
+          'form',
+          { className: 'borrow-form-container' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            'Borrow Money'
+          ),
+          _react2.default.createElement(
+            'h2',
+            null,
+            'Public key [',
+            this.props.user,
+            ']\'s credit score is ',
+            this.props.creditScore
+          ),
+          _react2.default.createElement('input', {
+            type: 'number',
+            name: 'borrowAmount',
+            onChange: this.handleBorrowAmountChange,
+            value: this.state.borrowAmount,
+            placeholder: 'ETH'
+          }),
+          _react2.default.createElement(_RaisedButton2.default, { onClick: this.handleSubmit, primary: true, label: 'Borrow' })
         )
       );
     }
@@ -15810,9 +15821,11 @@ var _actions = __webpack_require__(64);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var test = '103';
+  var user = state.currentUser;
+  var creditScore = state.creditScore;
   return {
-    borrow_amount: test
+    user: user,
+    creditScore: creditScore
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -16066,6 +16079,11 @@ var reducer = function reducer() {
   Object.freeze(state);
   var newState = void 0;
   switch (action.type) {
+    case _actions.RECEIVE_USER:
+      newState = Object.assign({}, state);
+      newState.currentUser = action.user;
+      newState.creditScore = 654;
+      return newState;
     case _actions.RECEIVE_BORROW_REQUEST:
       newState = Object.assign({}, state);
       var amount = action.payload.amount;
@@ -16234,12 +16252,12 @@ var Splash = function (_React$Component) {
           { className: 'hero-image' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'splash' },
             'Lorem ipsum slogan lorem ipsum'
           ),
           _react2.default.createElement(
             'ul',
-            null,
+            { className: 'splash' },
             _react2.default.createElement(
               'li',
               null,

@@ -1,5 +1,5 @@
 import { 
-  RECEIVE_HELLO, 
+  RECEIVE_USER, 
   RECEIVE_BORROW_REQUEST,
   PAYBACK_LOAN
 } from './actions';
@@ -15,6 +15,11 @@ const reducer = (state = initialState, action) => {
   Object.freeze(state);
   let newState;
   switch(action.type) {
+    case RECEIVE_USER: 
+      newState = Object.assign({}, state); 
+      newState.currentUser = action.user;
+      newState.creditScore = 654;
+      return newState;
     case RECEIVE_BORROW_REQUEST:
       newState = Object.assign({}, state); 
       let amount = action.payload.amount;

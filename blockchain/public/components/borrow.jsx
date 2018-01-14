@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class Borrow extends React.Component {
   constructor(props) {
@@ -18,21 +19,22 @@ class Borrow extends React.Component {
     this.props.history.push(`/payback`);
   }
   render() {
-    let creditScore = 685;
     return (
-      <form className="borrow-form-container">
-        <h1>Your credit score is {creditScore}</h1>
-        <input 
-          type="number" 
-          name="borrowAmount" 
-          onChange={this.handleBorrowAmountChange} 
-          value={this.state.borrowAmount} 
-          placeholder="ETH"
-        />
+      <div className="borrow-container">
+        <form className="borrow-form-container">
+          <h1>Borrow Money</h1>
+          <h2>Public key [{this.props.user}]'s credit score is {this.props.creditScore}</h2>
+          <input 
+            type="number" 
+            name="borrowAmount" 
+            onChange={this.handleBorrowAmountChange} 
+            value={this.state.borrowAmount} 
+            placeholder="ETH"
+          />
+          <RaisedButton onClick={this.handleSubmit} primary={true} label="Borrow"/>
+        </form>
         
-        <button onClick={this.handleSubmit}>Submit</button>
-
-      </form>
+      </div>
     );
   }
 }

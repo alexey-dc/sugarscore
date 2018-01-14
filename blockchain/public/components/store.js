@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 let _defaultState = {
   currentUser: null,
+  creditScore: 0,
   loans: [
     {loanId: 0, paybackAmount: 5, daysRemaining: 10},
     {loanId: 1, paybackAmount: 1, daysRemaining: 12},
