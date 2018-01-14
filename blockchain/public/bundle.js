@@ -18749,6 +18749,7 @@ var Borrow = function (_React$Component) {
         ratePercent: 5,
         durationDays: 30
       };
+      debugger;
       this.props.newLoan(loan);
       // this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
