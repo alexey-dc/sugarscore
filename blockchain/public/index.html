@@ -8,6 +8,8 @@
   <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
   <script src="./bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+  <script src="./index.js"></script>
 
 </head>
 <body>
@@ -70,9 +72,9 @@
               <div class="col-lg-2">Pay Back Eth</div>
               <div class="col-lg-5">
                 <div class="input-group  input-group-sm">
-                  <input placeholder="How much ETH do you want to repay?" type="text" class="form-control" id="candidateName" name="candidateName" />
+                  <input placeholder="How much ETH do you want to repay?" type="text" class="form-control" id="payback_ammount" name="candidateName" />
                   <span class="input-group-btn">
-                    <button type="button" class="btn btn-primary" id="voteSubmit">Pay Back Currency</button>
+                    <button type="button" class="btn btn-primary" id="pay_back_currency">Pay Back Currency</button>
                   </span>
                 </div>
             </div>
@@ -93,6 +95,17 @@
             </div>
             </div>
         </div>
+
+
+        <div class="row">
+<div class="col-lg-2">   Use your credit rating:   </div>
+        </div>
+
+
+        <span class="input-group-btn">
+          <a href="https://propy.com/" type="button" class="btn btn-warning" id="voteSubmit">Get a Mortgage for your house on propy.com!</a>
+          <a href="https://usa.visa.com/pay-with-visa/find-card/" type="button" class="btn btn-info" id="voteSubmit">Instantly get a credit card!</a>
+        </span>
 
     </div>
 
