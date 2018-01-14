@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 class Splash extends React.Component {
   constructor(props) {
     super(props);
@@ -19,17 +20,24 @@ class Splash extends React.Component {
   }
   render() {
     return (
-      <form className="public-key">
-        <input 
-          type="text" 
-          name="publicKey" 
-          onChange={this.handlePublicKeyChange} 
-          value={this.state.publicKey} 
-          placeholder="Enter your public key"
-        />
-        
-        <button onClick={this.handleSubmit}>Submit</button>
-      </form>
+      <div className="main-container">
+        <h1>Lorem ipsum slogan lorem ipsum</h1>
+        <ul>
+          <li>Feature one</li>
+          <li>Feature two</li>
+          <li>Feature three</li>
+        </ul>
+        <form className="public-key">
+          <TextField 
+            hintText="Enter your public key"
+            onChange={this.handlePublicKeyChange} 
+            value={this.state.publicKey} 
+            name="publicKey" 
+            type="text" 
+          />
+          <RaisedButton onClick={this.handleSubmit} label="Get Started"/>
+        </form>
+      </div>
     );
   }
 }
