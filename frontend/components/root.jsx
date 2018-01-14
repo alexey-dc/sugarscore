@@ -1,13 +1,16 @@
 import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import Widget from './widget';
-import Splash from './splash';
+import App from './app';
 
-const Root = () => {
+const Root = ({ store }) => {
   return (
-    <HashRouter>
-      <Splash />
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </Provider>
   );
 };
 

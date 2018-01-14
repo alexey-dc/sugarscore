@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Splash = () => {
+const TopNav = () => {
   return (
     <div>
 
@@ -8,4 +8,4 @@ const Splash = () => {
   );
 };
 
-export default Splash;
+export default TopNav;
