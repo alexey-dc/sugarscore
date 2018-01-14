@@ -14,6 +14,3 @@ API:
       ]
   - borrow(address, amount, ratePercent, durationDays)
   - payBack(address, loanId)
-
-Non-API definitions:
-  - updateReputation(address)
