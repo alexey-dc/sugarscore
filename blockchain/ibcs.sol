@@ -1,80 +1,90 @@
 // We have to specify what version of compiler this code will compile with
 pragma solidity ^0.4.11;
-  // - getProfile(address)
-  //   - coinsIn (int)
-  //   - totalBorrowed (int)
-  //   - borrowLimit (int)
-  //   - reputation (int)
-  // - getLoans
-  //   - loans (array)
-  //     [
-  //       - loanId (int)
-  //       - paybackAmount (int)
-  //       - daysRemaining (int)
-  //     ]
-  // - borrow(address, amount, ratePercent, durationDays)
-  // - payBack(address, loanId)
 
 contract Ibcs {
   uint256 loanIndex = 0;
+
   struct Loan {
     uint256 loanId;
     uint256 amount;
     uint32 rate; // decimals not supported in solidity; say 100% = 10000 rate, 0.1% = 10 rate
-    uint32 origination; // Unix timestamp
-    uint32 duration; // Milliseconds
-    address borrower;
-  }
-
-  struct LoanTransaction {
-    uint256 loanId;
-    uint32 repayTimestamp; // 0 for missed loans
-  }
-
-  struct Profile {
-    uint256 blanace;
-    Loan[] loans;
-    uint256 borrowLimit;
-    uint256 reputation;
+    uint64 origination; // Unix timestamp
+    uint64 duration; // Milliseconds
+    uint64 repayTimestamp; // 0 means loan has not been paid off
   }
   
   mapping (uint256 => Loan) private loans;
-  mapping (address => uint256) private balanceOf;
-  mapping (address => uint256[]) private currentLoans;
-  mapping (address => uint256[]) private loanHistory;
+  mapping (address => uint256) private balance; // 
+  mapping (address => uint256[]) private userLoanIds; // loans by user
 
   address private owner;
   string public name;
   string public symbol;
   uint8 public decimals = 18;
   uint256 public totalSupply;
-
-  // This generates a public event on the blockchain that will notify clients
-  event Transfer(address indexed from, address indexed to, uint256 value);
-  // This notifies clients about the amount burnt
-  event Burn(address indexed from, uint256 value);
   
-  function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
+  function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) public payable {
     totalSupply = initialSupply * 10 ** uint256(decimals);
     owner = msg.sender;
-    balanceOf[owner] = totalSupply;
+    balance[owner] = totalSupply;
     name = tokenName;
     symbol = tokenSymbol;
   }
+
+  function getProfile(address user) public returns (uint256 currentBalance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
+    currentBalance = balance[user];
+    loanSum = getLoanSum(user);
+    reputation = getReputation(user);
+    borrowLimit = getBorrowLimit(reputation);
+    return (currentBalance, loanSum, reputation, borrowLimit);
+  }
+  function getReputation(address user) private returns (uint256 result) {
+    return balance[user];
+  }
+  function getBorrowLimit(uint256 reputation) private returns (uint256 limit) {
+    return reputation;
+  }
+  function getLoanSum(address user) private returns (uint256 loanSum) {
+    uint256[] storage loanIds = userLoanIds[user];
+    loanSum = 0;
+    for(uint256 i = 0; i < loanIds.length; i++) {
+      Loan storage loan = loans[loanIds[i]];
+      if(loan.repayTimestamp == 0)
+        loanSum += loan.amount;
+    }
+    return loanSum;
+  }
+
+  function getUnpayedLoanIds(address user) public returns (uint256[] loanIds) {
+    uint256[] storage storageLoanIds = userLoanIds[user];
+    return storageLoanIds;
+    uint256[] storage unpayedLoanIds;
+    for(uint256 i = 0; i< storageLoanIds.length; i++) {
+      if(loans[storageLoanIds[i]].repayTimestamp == 0) {
+        unpayedLoanIds.push(storageLoanIds[i]);
+      }
+    }
+    return unpayedLoanIds;
+  }
+
+  function getLoanDetails(uint256 loanId) public returns (uint256 amount, uint64 rate, uint64 origination, uint64 duration) {
+    Loan storage loan = loans[loanId];
+    return (loan.amount, loan.rate, loan.origination, loan.duration);
+  }
+
 /*
-  function profile(address user) public returns (Profile profile) {
-
+  function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
+    if (balance[borrower] >= amount) {
+      uint256 id = loanIndex++;
+      loans[id] = Loan(id, amount, rate, origination, duration, 0);
+      userLoanIds[borrower].push(id);
+      balance[borrower] = balance[borrower] - amount;
+    }    
   }
 
-  function getCurrentLoans(address user) public returns (Loan[] loans) {
-
+  function payBack(address borrower, uint id, uint32 repayTimestamp) {
+    loans[id].repayTimestamp = repayTimestamp;
+    balance[borrower] = balance[borrower] + loans[id].amount;
   }
-  */
-  function borrow() {
-
-  }
-  function payBack() {
-    
-  }
-
+*/
 }
