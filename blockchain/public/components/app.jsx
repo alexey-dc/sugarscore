@@ -16,7 +16,9 @@ const App = () => {
       <div className="main">
         <Switch>
           <Route exact path="/" component={Splash}/>
-
+          <Route exact path="/borrow" component={Splash}/>
+          <Route exact path="/payback" component={Splash}/>
+          
         </Switch>
       </div>
     </div>
