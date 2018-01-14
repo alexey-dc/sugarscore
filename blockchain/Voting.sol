@@ -1,47 +1,36 @@
 // We have to specify what version of compiler this code will compile with
 pragma solidity ^0.4.11;
 
-contract Voting {
-  /* mapping field below is equivalent to an associative array or hash.
-  The key of the mapping is candidate name stored as type bytes32 and value is
-  an unsigned integer to store the vote count
-  */
+contract Ibcs {
+
+  struct Loan {
+    uint amount;
+    address borrower;
+    uint rate; // decimals not supported in solidity; say 100% = 10000 rate, 0.1% = 10 rate
+    uint year;
+    uint month;
+    uint day;
+    uint durationDays;
+  }
   
-  mapping (bytes32 => uint8) public votesReceived;
+  mapping (address => uint256) private balanceOf;
+  mapping (address => Loan[]) private loans;   // public_key => amount
+  string public name;
+  string public symbol;
+  uint8 public decimals = 18;
+  uint256 public totalSupply;
+
+  // This generates a public event on the blockchain that will notify clients
+  event Transfer(address indexed from, address indexed to, uint256 value);
+  // This notifies clients about the amount burnt
+  event Burn(address indexed from, uint256 value);
+
   
-  /* Solidity doesn't let you pass in an array of strings in the constructor (yet).
-  We will use an array of bytes32 instead to store the list of candidates
-  */
-  
-  bytes32[] public candidateList;
-
-  /* This is the constructor which will be called once when you
-  deploy the contract to the blockchain. When we deploy the contract,
-  we will pass an array of candidates who will be contesting in the election
-  */
-  function Voting(bytes32[] candidateNames) {
-    candidateList = candidateNames;
+  function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
+    totalSupply = initialSupply * 10 ** uint256(decimals);
+    balanceOf[msg.sender] = totalSupply;
+    name = tokenName;
+    symbol = tokenSymbol;
   }
 
-  // This function returns the total votes a candidate has received so far
-  function totalVotesFor(bytes32 candidate) returns (uint8) {
-    if (validCandidate(candidate) == false) throw;
-    return votesReceived[candidate];
-  }
-
-  // This function increments the vote count for the specified candidate. This
-  // is equivalent to casting a vote
-  function voteForCandidate(bytes32 candidate) {
-    if (validCandidate(candidate) == false) throw;
-    votesReceived[candidate] += 1;
-  }
-
-  function validCandidate(bytes32 candidate) returns (bool) {
-    for(uint i = 0; i < candidateList.length; i++) {
-      if (candidateList[i] == candidate) {
-        return true;
-      }
-    }
-    return false;
-  }
 }
