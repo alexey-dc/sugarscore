@@ -23,7 +23,7 @@ contract Ibcs {
   uint8 public decimals = 18;
   uint256 public totalSupply;
   
-  function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) {
+  function Ibcs(uint256 initialSupply, string tokenName, string tokenSymbol) public payable {
     totalSupply = initialSupply * 10 ** uint256(decimals);
     owner = msg.sender;
     balance[owner] = totalSupply;
@@ -31,15 +31,15 @@ contract Ibcs {
     symbol = tokenSymbol;
   }
 
-  function getProfile(address user) public returns (uint256 balance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
-    balance = balanceOf[user];
+  function getProfile(address user) public returns (uint256 currentBalance, uint256 loanSum, uint256 reputation, uint256 borrowLimit) {
+    currentBalance = balance[user];
     loanSum = getLoanSum(user);
     reputation = getReputation(user);
     borrowLimit = getBorrowLimit(reputation);
-    return (balance, loanSum, reputation, borrowLimit);
+    return (currentBalance, loanSum, reputation, borrowLimit);
   }
   function getReputation(address user) private returns (uint256 result) {
-    return balanceOf[user];
+    return balance[user];
   }
   function getBorrowLimit(uint256 reputation) private returns (uint256 limit) {
     return reputation;
