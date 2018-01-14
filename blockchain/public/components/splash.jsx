@@ -24,8 +24,10 @@ class Splash extends React.Component {
   handleSubmit(e) {
     // e.preventDefault();
     this.props.login(this.state.publicKey);
+
     this.props.history.push(`/borrow`);
   }
+  
 
   render() {
     return (
