@@ -17,6 +17,7 @@ pragma solidity ^0.4.11;
 
 contract Ibcs {
   uint256 loanIndex = 0;
+
   struct Loan {
     uint256 loanId;
     uint256 amount;
@@ -39,9 +40,8 @@ contract Ibcs {
   
   mapping (uint256 => Loan) private loans;
   mapping (address => uint256) private balanceOf;
-  // TODO: rename to unpayedLoanIds
-  mapping (address => uint256[]) private currentLoans;
-  mapping (address => LoanTransaction[]) private loanHistory;
+  mapping (address => uint256[]) private currentLoans; // loans by user
+  mapping (address => uint256[]) private loanHistory;
 
   address private owner;
   string public name;
@@ -109,9 +109,13 @@ contract Ibcs {
     return (loan.amount, loan.rate, loan.origination, loan.duration);
   }
 */
-  function borrow() {
 
+  function borrow(uint256 amount, uint32 rate, uint32 origination, uint32 duration, address borrower) {
+    uint id = loanIndex++;
+    loans[id] = Loan(id, amoun, rate, origination, duration, borrower);
+    currentLoans[borrower].;
   }
+
   function payBack() {
     
   }
