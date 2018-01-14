@@ -54,7 +54,7 @@ app.post('/borrow', function(req, res) {
   var amount = req.query.amount;
   var ratePercent = req.query.ratePercent;
   var durationDays = req.query.durationDays;
-  var origination = 12;
+  var origination = new Date();
 
   try{
     contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
