@@ -16,7 +16,6 @@ pragma solidity ^0.4.11;
   // - payBack(address, loanId)
 
 contract Ibcs {
-
   uint256 loanIndex = 0;
   struct Loan {
     uint256 loanId;
@@ -30,6 +29,13 @@ contract Ibcs {
   struct LoanTransaction {
     uint256 loanId;
     uint32 repayTimestamp; // 0 for missed loans
+  }
+
+  struct Profile {
+    uint256 blanace;
+    Loan[] loans;
+    uint256 borrowLimit;
+    uint256 reputation;
   }
   
   mapping (uint256 => Loan) private loans;
@@ -54,6 +60,20 @@ contract Ibcs {
     balanceOf[owner] = totalSupply;
     name = tokenName;
     symbol = tokenSymbol;
+  }
+
+  function profile(address user) public returns (Profile profile) {
+
+  }
+
+  function currentLoans(address user) public returns (Loan[] loans) {
+
+  }
+  function borrow() {
+
+  }
+  function payBack() {
+    
   }
 
 }
