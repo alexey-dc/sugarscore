@@ -13661,6 +13661,7 @@ var _top_nav2 = _interopRequireDefault(_top_nav);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//Turn routes to authroutes 
 var App = function App() {
   return _react2.default.createElement(
     'div',
@@ -13673,8 +13674,8 @@ var App = function App() {
         _reactRouterDom.Switch,
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash_container2.default }),
-        _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/borrow', component: _borrow_container2.default }),
-        _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/payback', component: _payback_container2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/borrow', component: _borrow_container2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/payback', component: _payback_container2.default })
       )
     )
   );
@@ -14067,7 +14068,7 @@ var Splash = function (_React$Component) {
 
     _this.state = { publicKey: '' };
     _this.handlePublicKeyChange = _this.handlePublicKeyChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -14082,13 +14083,14 @@ var Splash = function (_React$Component) {
     value: function handleSubmit(e) {
       // e.preventDefault();
       this.props.login(this.state.publicKey);
+      this.props.history.push('/borrow');
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'form',
-        { onSubmit: this.handleSubmit },
+        null,
         _react2.default.createElement('input', {
           type: 'text',
           name: 'publicKey',
@@ -14140,7 +14142,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var test = 'A User';
   return {
-    ownProps: ownProps,
+    history: ownProps.history,
     user: test
     // user: values(state.user)
   };
@@ -14182,7 +14184,11 @@ var TopNav = function TopNav() {
     _react2.default.createElement(
       'div',
       { className: 'brand' },
-      'ChangeCred'
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/' },
+        'ChangeCred'
+      )
     ),
     _react2.default.createElement(
       'div',

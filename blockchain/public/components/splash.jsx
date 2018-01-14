@@ -6,7 +6,7 @@ class Splash extends React.Component {
     super(props);
     this.state = ({publicKey: ''});
     this.handlePublicKeyChange = this.handlePublicKeyChange.bind(this);
-    this.handleSubmit = this.handleSubmit(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handlePublicKeyChange(e) {
     e.preventDefault();
@@ -15,10 +15,11 @@ class Splash extends React.Component {
   handleSubmit(e) {
     // e.preventDefault();
     this.props.login(this.state.publicKey);
+    this.props.history.push(`/borrow`);
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <input 
           type="text" 
           name="publicKey" 
