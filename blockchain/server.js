@@ -21,7 +21,8 @@ app.get('/getProfile', function(req, res) {
       coinsIn: bProfile[0].toString(),
       totalBorrowed: bProfile[1].toString(),
       reputation: bProfile[2].toString(),
-      borrowLimit: bProfile[3].toString()
+      borrowLimit: bProfile[3].toString(),
+      address: address
     }
     res.send(profile)
   } catch (e) {
