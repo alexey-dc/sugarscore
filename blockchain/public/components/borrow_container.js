@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Borrow from './borrow';
-import { borrowMoney } from './actions';
+import { borrowRequest } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
   let test = '103';
@@ -10,6 +10,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = dispatch => ({
+  newLoan: (loan) => dispatch(borrowRequest(loan))
 });
 export default withRouter(connect(
   mapStateToProps,

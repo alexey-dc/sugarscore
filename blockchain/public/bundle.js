@@ -13694,6 +13694,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
@@ -13702,25 +13704,63 @@ var _reactRouterDom = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Borrow = function Borrow(_ref) {
-  var borrow_amount = _ref.borrow_amount;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      _reactRouterDom.Link,
-      { to: '/payback' },
-      _react2.default.createElement(
-        'button',
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Borrow = function (_React$Component) {
+  _inherits(Borrow, _React$Component);
+
+  function Borrow(props) {
+    _classCallCheck(this, Borrow);
+
+    var _this = _possibleConstructorReturn(this, (Borrow.__proto__ || Object.getPrototypeOf(Borrow)).call(this, props));
+
+    _this.state = { borrowAmount: 0 };
+    _this.handleBorrowAmountChange = _this.handleBorrowAmountChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(Borrow, [{
+    key: 'handleBorrowAmountChange',
+    value: function handleBorrowAmountChange(e) {
+      e.preventDefault();
+      this.setState({ borrowAmount: e.target.value });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.newLoan(this.state.borrowAmount);
+      this.props.history.push('/payback');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
         null,
-        'Borrow ',
-        borrow_amount,
-        ' ETH'
-      )
-    )
-  );
-};
+        _react2.default.createElement('input', {
+          type: 'number',
+          name: 'borrowAmount',
+          onChange: this.handleBorrowAmountChange,
+          value: this.state.borrowAmount,
+          placeholder: 'ETH'
+        }),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.handleSubmit },
+          'Submit'
+        )
+      );
+    }
+  }]);
+
+  return Borrow;
+}(_react2.default.Component);
 
 exports.default = Borrow;
 
@@ -13754,7 +13794,11 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    newLoan: function newLoan(loan) {
+      return dispatch((0, _actions.borrowRequest)(loan));
+    }
+  };
 };
 exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_borrow2.default));
 
