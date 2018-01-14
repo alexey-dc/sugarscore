@@ -13502,16 +13502,10 @@ module.exports = __webpack_require__(269);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var RECEIVE_HELLO = exports.RECEIVE_HELLO = 'RECEIVE_HELLO';
+var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
 var RECEIVE_BORROW_REQUEST = exports.RECEIVE_BORROW_REQUEST = 'RECEIVE_BORROW_REQUEST';
 var PAYBACK_LOAN = exports.PAYBACK_LOAN = 'PAYBACK_LOAN';
 
-var testAction = exports.testAction = function testAction(payload) {
-  return {
-    type: "RECEIVE_HELLO",
-    hellos: payload
-  };
-};
 var borrowRequest = exports.borrowRequest = function borrowRequest(payload) {
   return {
     type: "BORROW_REQUEST",
@@ -13542,9 +13536,13 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(132);
 
-var _splash = __webpack_require__(152);
+var _splash_container = __webpack_require__(373);
 
-var _splash2 = _interopRequireDefault(_splash);
+var _splash_container2 = _interopRequireDefault(_splash_container);
+
+var _borrow_container = __webpack_require__(380);
+
+var _borrow_container2 = _interopRequireDefault(_borrow_container);
 
 var _top_nav = __webpack_require__(153);
 
@@ -13563,7 +13561,8 @@ var App = function App() {
       _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash_container2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/borrow', component: _borrow_container2.default })
       )
     )
   );
@@ -13699,19 +13698,61 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(6);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouterDom = __webpack_require__(132);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Splash = function Splash() {
-  return _react2.default.createElement(
-    'div',
-    null,
-    'splash'
-  );
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Splash = function (_React$Component) {
+  _inherits(Splash, _React$Component);
+
+  function Splash(props) {
+    _classCallCheck(this, Splash);
+
+    var _this = _possibleConstructorReturn(this, (Splash.__proto__ || Object.getPrototypeOf(Splash)).call(this, props));
+
+    _this.state = { publicKey: '' };
+    _this.handlePublicKeyChange = _this.handlePublicKeyChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(Splash, [{
+    key: 'handlePublicKeyChange',
+    value: function handlePublicKeyChange(e) {
+      e.preventDefault();
+      this.setState({ publicKey: e.target.value });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement('input', { type: 'text', name: 'publicKey', onChange: this.handlePublicKeyChange, value: this.state.publicKey, placeholder: 'Enter your public key' }),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/borrow' },
+          'Borrow'
+        )
+      );
+    }
+  }]);
+
+  return Splash;
+}(_react2.default.Component);
+
+;
 
 exports.default = Splash;
 
@@ -32062,6 +32103,300 @@ function symbolObservablePonyfill(root) {
 
 	return result;
 };
+
+/***/ }),
+/* 373 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(333);
+
+var _reactRouterDom = __webpack_require__(132);
+
+var _splash = __webpack_require__(152);
+
+var _splash2 = _interopRequireDefault(_splash);
+
+var _actions = __webpack_require__(148);
+
+var _values = __webpack_require__(379);
+
+var _values2 = _interopRequireDefault(_values);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var test = 'A User';
+  return {
+    ownProps: ownProps,
+    user: test
+    // user: values(state.user)
+  };
+};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    // getUser: () => dispatch(getEvents())
+  };
+};
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_splash2.default));
+
+/***/ }),
+/* 374 */
+/***/ (function(module, exports) {
+
+/**
+ * A specialized version of `_.map` for arrays without support for iteratee
+ * shorthands.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} iteratee The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ */
+function arrayMap(array, iteratee) {
+  var index = -1,
+      length = array == null ? 0 : array.length,
+      result = Array(length);
+
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+  return result;
+}
+
+module.exports = arrayMap;
+
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isPrototype = __webpack_require__(94),
+    nativeKeys = __webpack_require__(377);
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ */
+function baseKeys(object) {
+  if (!isPrototype(object)) {
+    return nativeKeys(object);
+  }
+  var result = [];
+  for (var key in Object(object)) {
+    if (hasOwnProperty.call(object, key) && key != 'constructor') {
+      result.push(key);
+    }
+  }
+  return result;
+}
+
+module.exports = baseKeys;
+
+
+/***/ }),
+/* 376 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(374);
+
+/**
+ * The base implementation of `_.values` and `_.valuesIn` which creates an
+ * array of `object` property values corresponding to the property names
+ * of `props`.
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array} props The property names to get values for.
+ * @returns {Object} Returns the array of property values.
+ */
+function baseValues(object, props) {
+  return arrayMap(props, function(key) {
+    return object[key];
+  });
+}
+
+module.exports = baseValues;
+
+
+/***/ }),
+/* 377 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__(236);
+
+/* Built-in method references for those with the same name as other `lodash` methods. */
+var nativeKeys = overArg(Object.keys, Object);
+
+module.exports = nativeKeys;
+
+
+/***/ }),
+/* 378 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeKeys = __webpack_require__(190),
+    baseKeys = __webpack_require__(375),
+    isArrayLike = __webpack_require__(57);
+
+/**
+ * Creates an array of the own enumerable property names of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects. See the
+ * [ES spec](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
+ * for more details.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property names.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.keys(new Foo);
+ * // => ['a', 'b'] (iteration order is not guaranteed)
+ *
+ * _.keys('hi');
+ * // => ['0', '1']
+ */
+function keys(object) {
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+}
+
+module.exports = keys;
+
+
+/***/ }),
+/* 379 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseValues = __webpack_require__(376),
+    keys = __webpack_require__(378);
+
+/**
+ * Creates an array of the own enumerable string keyed property values of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Object
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property values.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * _.values(new Foo);
+ * // => [1, 2] (iteration order is not guaranteed)
+ *
+ * _.values('hi');
+ * // => ['h', 'i']
+ */
+function values(object) {
+  return object == null ? [] : baseValues(object, keys(object));
+}
+
+module.exports = values;
+
+
+/***/ }),
+/* 380 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(333);
+
+var _reactRouterDom = __webpack_require__(132);
+
+var _borrow = __webpack_require__(381);
+
+var _borrow2 = _interopRequireDefault(_borrow);
+
+var _actions = __webpack_require__(148);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  var test = '103';
+  return {
+    borrow_amount: test
+  };
+};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_borrow2.default));
+
+/***/ }),
+/* 381 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Borrow = function Borrow(_ref) {
+  var borrow_amount = _ref.borrow_amount;
+
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'button',
+      null,
+      'Borrow ',
+      borrow_amount,
+      ' ETH'
+    )
+  );
+};
+
+exports.default = Borrow;
 
 /***/ })
 /******/ ]);

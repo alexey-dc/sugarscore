@@ -6,7 +6,8 @@ import {
   Link,
   HashRouter
 } from 'react-router-dom';
-import Splash from './splash';
+import SplashContainer from './splash_container';
+import BorrowContainer from './borrow_container';
 import TopNav from './top_nav';
 
 const App = () => {
@@ -15,8 +16,8 @@ const App = () => {
       <Route path="/" component={TopNav}/>
       <div className="main">
         <Switch>
-          <Route exact path="/" component={Splash}/>
-
+          <Route exact path="/" component={SplashContainer}/>
+          <Route exact path="/borrow" component={BorrowContainer}/>
         </Switch>
       </div>
     </div>
