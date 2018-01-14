@@ -5,7 +5,7 @@ API:
     - totalBorrowed (int)
     - borrowLimit (int)
     - reputation (int)
-  - getLoans
+  - getLoans(address)
     - loans (array)
       [
         - loanId (int)
@@ -14,3 +14,6 @@ API:
       ]
   - borrow(address, amount, ratePercent, durationDays)
   - payBack(address, loanId)
+
+Non-API definitions:
+  - updateReputation(address)
