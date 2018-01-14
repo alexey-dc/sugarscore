@@ -18,8 +18,8 @@ app.get('/getProfile', function(req, res) {
     var address = req.query.address;
     var bProfile = contractInstance.getProfile.call(address, web3.eth.accounts[0]);
     var profile = {
-      currentBalance: bProfile[0].toString(),
-      loanSum: bProfile[1].toString(),
+      coinsIn: bProfile[0].toString(),
+      totalBorrowed: bProfile[1].toString(),
       reputation: bProfile[2].toString(),
       borrowLimit: bProfile[3].toString()
     }
@@ -43,10 +43,10 @@ app.get('/getLoans', function(req,res) {
       loanId: loanId,
       paybackAmount: bLoan[0].toString(),
       daysRemaining: daysRemaining
-    }
-    unpayedLoans.push(loan)
+    };
+    unpayedLoans.push(loan);
   }
-  res.send(unpayedLoans)
+  res.send(unpayedLoans);
 });
 
 app.post('/borrow', function(req, res) {
