@@ -1,16 +1,20 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Payback from './payback';
-import { paybackLoan } from './actions';
+import { getLoans, paybackLoanOnBlockchain } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
   let loans = state.loans;
+  let user = state.currentUser;
+  // getLoans(user.address);
   return {
+    user,
     loans
   };
 };
 const mapDispatchToProps = dispatch => ({
-  payback: (loanId) => dispatch(paybackLoan(loanId))
+  getloans: (address) => dispatch(getLoans(address)),
+  payback: (address, loanId) => dispatch(paybackLoanOnBlockchain(loanId))
 });
 export default withRouter(connect(
   mapStateToProps,

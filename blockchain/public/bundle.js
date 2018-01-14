@@ -18743,10 +18743,14 @@ var Borrow = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      var newLoan = {
-        address: this.user.address
+      var loan = {
+        address: this.user.address,
+        amount: this.state.borrowAmount,
+        ratePercent: 5,
+        durationDays: 30
       };
-      this.props.newLoan(this.state.borrowAmount);
+      this.props.newLoan(loan);
+      // this.props.newLoan(this.state.borrowAmount);
       this.props.history.push('/payback');
     }
   }, {
@@ -18919,6 +18923,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -18929,32 +18935,63 @@ var _payback_list_item2 = _interopRequireDefault(_payback_list_item);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Payback = function Payback(_ref) {
-  var loans = _ref.loans,
-      payback = _ref.payback;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  // debugger
-  var loanList = loans.map(function (loan) {
-    return _react2.default.createElement(_payback_list_item2.default, { loan: loan, payback: payback });
-  });
-  var bankRoll = 1.45;
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'h1',
-      null,
-      'You have ',
-      bankRoll,
-      ' ETH'
-    ),
-    _react2.default.createElement(
-      'ul',
-      null,
-      loanList
-    )
-  );
-};
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Payback = function (_React$Component) {
+  _inherits(Payback, _React$Component);
+
+  function Payback(props) {
+    _classCallCheck(this, Payback);
+
+    var _this = _possibleConstructorReturn(this, (Payback.__proto__ || Object.getPrototypeOf(Payback)).call(this, props));
+
+    _this.loans = _this.props.loans;
+
+    return _this;
+  }
+
+  _createClass(Payback, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {}
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // nextProps.loans
+      // debugger
+      console.log(nextProps.loans);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var loanList = this.props.loans.map(function (loan) {
+        return _react2.default.createElement(_payback_list_item2.default, { loan: loan, payback: _this2.props.payback });
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          'You have ',
+          ' ETH'
+        ),
+        _react2.default.createElement(
+          'ul',
+          null,
+          loanList
+        )
+      );
+    }
+  }]);
+
+  return Payback;
+}(_react2.default.Component);
 
 exports.default = Payback;
 
@@ -18983,14 +19020,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var loans = state.loans;
+  var user = state.currentUser;
+  // getLoans(user.address);
   return {
+    user: user,
     loans: loans
   };
 };
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    payback: function payback(loanId) {
-      return dispatch((0, _actions.paybackLoan)(loanId));
+    getloans: function getloans(address) {
+      return dispatch((0, _actions.getLoans)(address));
+    },
+    payback: function payback(address, loanId) {
+      return dispatch((0, _actions.paybackLoanOnBlockchain)(loanId));
     }
   };
 };
