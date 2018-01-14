@@ -31,8 +31,19 @@ app.get('/getProfile', function(req, res) {
 
 app.get('/getLoans', function(req,res) {
   var address = req.query.address;
-  var unpayedLoanIds = contractInstance.unpayedLoanIds.call(address, web3.eth.accounts[0]);
-
+  var unpayedLoanIds = contractInstance.getUnpayedLoanIds.call(address, web3.eth.accounts[0]);
+  var unpayedLoans = []
+  for(var loanId in unpayedLoanIds) {
+    var bLoan = contractInstance.getLoanDetails.call(loanId, web3.eth.accounts[0]);
+    var loan = {
+      amount: bLoan[0].toString(),
+      rate: bLoan[0].toString(),
+      origination: bLoan.toString(),
+      duration: bLoan.toString()
+    }
+    unpayedLoans.push(loan)
+  }
+  res.send(unpayedLoans)
 });
 
 app.post('/borrow', function(req, res) {
@@ -61,7 +72,11 @@ app.post('/borrow', function(req, res) {
 app.post('/payBack', function(req, res) {
   var address = req.query.address;
   var loanId = req.query.loanId;
-
+  var repayTimestamp = new Date();
+  contractInstance.payBack(address, { from: web3.eth.accounts[0] }, function(result) {
+    // TODO: support failure
+    res.send({ success: true });
+  });
 });
 
 

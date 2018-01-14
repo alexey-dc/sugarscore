@@ -73,7 +73,9 @@ contract Ibcs {
   }
 
 
-  function borrow(uint256 amount, uint32 rate, uint64 origination, uint32 duration, address borrower) {
+
+  function borrow(uint256 amount, uint32 rate, uint64 origination, uint64 duration, address borrower) {
+
     if (balance[borrower] >= amount) {
       uint256 id = loanIndex++;
       loans[id] = Loan(id, amount, rate, origination, duration, 0);
@@ -82,9 +84,8 @@ contract Ibcs {
     }
   }
 
-  function payBack(address borrower, uint id, uint32 repayTimestamp) {
+  function payBack(address borrower, uint id, uint64 repayTimestamp) {
     loans[id].repayTimestamp = repayTimestamp;
     balance[borrower] = balance[borrower] + loans[id].amount;
   }
-
 }
