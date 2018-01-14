@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
+
   res.sendFile(path.join(__dirname + 'public/index.html'));
 });
 
@@ -17,11 +18,13 @@ app.post('/payBackMoney', function (req, res) {
   try {
     const ammount = req.body.ammount.trim();
 
-   const resultMoney =   contractInstance.payBack.call(ammount, { from: web3.eth.accounts[0] });
-      console.log("payBackMoney res: "+resultMoney);
-      //const totalVotes = contractInstance.payBack.call(candidateName, { from: web3.eth.accounts[0] }).toString();
-      res.send({ ammount: resultMoney});
+  contractInstance.payBack(ammount, { from: web3.eth.accounts[0] }, function(result) {
 
+
+      const resultMoney = contractInstance.get_wallet_balance.call(ammount, { from: web3.eth.accounts[0] }).toString();
+      console.log("payBackMoney res: "+resultMoney);
+      res.send({ ammount: resultMoney});
+        });
   } catch (e) {
     res.status('400').send(`Failed! ${e}`);
   }

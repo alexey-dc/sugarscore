@@ -28,6 +28,16 @@ $(document).ready(function() {
 
   $('#pay_back_currency').click(function(event) {
 
+    $('.table_of_transactions').append('<tr>'
+    +'<th class="pay_back">+ 0x9cf08124ceabe4aab030f6841b045de951232acd6a31f83247a4de19fc05eea8</th>'
+      +'<th>5 ETH</th>'
+      +'<th>+10 points</th>'
+      +'<th>Jan/2/2018</th>'
+    +'</tr>');
+
+
+    $('.title_score').html('<h1>Your International Blockchain Credit Score : '+730+' pt</h1>');
+
   //  alert('Thanks for paying back '+  $('#payback_ammount').val() +" ETH");
 
     const headers = new Headers({
@@ -44,7 +54,7 @@ $(document).ready(function() {
 
           alert(JSON.stringify(res));
 
-          $('.current_eth').html(res.ammount);
+          $('.current_eth').html('Current ETH in wallet :'+res.ammount);
         }).catch(function() {
 
           // Error

@@ -48,7 +48,8 @@ contract Ibcs {
   string public symbol;
   uint8 public decimals = 18;
   uint256 public totalSupply;
-  uint256 public your_wallet_balance = 50 ;
+  uint256 public your_wallet_balance =50;
+  mapping (bytes32 => uint8) public trans_history;
 
   // This generates a public event on the blockchain that will notify clients
   event Transfer(address indexed from, address indexed to, uint256 value);
@@ -77,11 +78,16 @@ contract Ibcs {
 
   }
 
-  function payBack(uint256 amount) returns (uint256) {
+  function setBalance (uint256 amount){
+
+  your_wallet_balance = amount;
+  }
+
+  function payBack(uint256 amount) { //returns (uint256) {
 
   your_wallet_balance = your_wallet_balance-amount;
 
-  return your_wallet_balance;
+//  return your_wallet_balance;
   }//payBack
 
 
