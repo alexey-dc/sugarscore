@@ -74,9 +74,11 @@ contract Ibcs {
   */
 
 
-  function borrow() {
+  function borrowMoney(uint256 amount) {
 
-  }
+  your_wallet_balance = your_wallet_balance+amount;
+
+  }//borrow
 
   function setBalance (uint256 amount){
 

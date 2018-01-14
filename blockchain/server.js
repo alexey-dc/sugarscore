@@ -14,6 +14,22 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + 'public/index.html'));
 });
 
+app.post('/borrowMoney', function (req, res) {
+  try {
+    const ammount = req.body.ammount.trim();
+
+  contractInstance.borrowMoney(ammount, { from: web3.eth.accounts[0] }, function(result) {
+
+
+      const resultMoney = contractInstance.get_wallet_balance.call(ammount, { from: web3.eth.accounts[0] }).toString();
+      console.log("borrowMoney res: "+resultMoney);
+      res.send({ ammount: resultMoney});
+        });
+  } catch (e) {
+    res.status('400').send(`Failed! ${e}`);
+  }
+});
+
 app.post('/payBackMoney', function (req, res) {
   try {
     const ammount = req.body.ammount.trim();

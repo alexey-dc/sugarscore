@@ -14,27 +14,50 @@ $(document).ready(function() {
       // Error :(
     });//fetch
 
-  fetch('/candidates')
-  .then(res => res.json())
-  .then(res => {
-    const candidatesTableHTML = res.candidates.map(function(candidate) {
-      return `<tr><td>${candidate.name}</td><td id='${candidate.name}'>${candidate.votes}</td></tr>`;
+
+
+
+//borrow button
+
+$('#borrow_money').click(function(event) {
+  var bAmmount = $('#borrow_ammount').val();
+
+
+    const headers = new Headers({
+      "Content-Type": "application/json",
     });
 
-    $('#candidatesTable').html(candidatesTableHTML);
-  }).catch(function(err) {
-    // Error :(
-  });  //fetch
+        fetch('/borrowMoney', {
+          method: 'post',
+          headers: headers,
+          body: JSON.stringify({ ammount: $('#borrow_ammount').val() }),
+        })
+        .then(res => res.json())
+        .then(res => {
 
+
+          $('.table_of_transactions').append('<tr>'
+          +'<th class="borrowed">+ 0xfcb635837db6315d20820ee7b3f018867fec0aca78e3e69a52c146b28d402709</th>'
+            +'<th>'+bAmmount+' ETH</th>'
+            +'<th></th>'
+            +'<th>Jan/2/2018</th>'
+          +'</tr>');
+
+          //alert(JSON.stringify(res));
+
+          $('.current_eth').html('Current ETH in wallet :'+res.ammount);
+        }).catch(function() {
+
+          // Error
+        });
+
+}); //end borrow money
+
+
+//repay button click
   $('#pay_back_currency').click(function(event) {
 
-    $('.table_of_transactions').append('<tr>'
-    +'<th class="pay_back">+ 0x9cf08124ceabe4aab030f6841b045de951232acd6a31f83247a4de19fc05eea8</th>'
-      +'<th>5 ETH</th>'
-      +'<th>+10 points</th>'
-      +'<th>Jan/2/2018</th>'
-    +'</tr>');
-
+      var bAmmount = $('#borrow_ammount').val();
 
     $('.title_score').html('<h1>Your International Blockchain Credit Score : '+730+' pt</h1>');
 
@@ -52,7 +75,14 @@ $(document).ready(function() {
         .then(res => res.json())
         .then(res => {
 
-          alert(JSON.stringify(res));
+          //alert(JSON.stringify(res));
+
+          $('.table_of_transactions').append('<tr>'
+          +'<th class="pay_back">+ 0xb486c98b3763fdea6d6e809d53fda51a0273b34bc31d3aa760664859a401be3e</th>'
+            +'<th>'+bAmmount+' ETH</th>'
+            +'<th>+10 points</th>'
+            +'<th>Jan/2/2018</th>'
+          +'</tr>');
 
           $('.current_eth').html('Current ETH in wallet :'+res.ammount);
         }).catch(function() {
