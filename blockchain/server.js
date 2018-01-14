@@ -17,11 +17,11 @@ app.post('/payBackMoney', function (req, res) {
   try {
     const ammount = req.body.ammount.trim();
 
-    contractInstance.payBack(ammount, { from: web3.eth.accounts[0] }, function(result) {
+   const resultMoney =   contractInstance.payBack.call(ammount, { from: web3.eth.accounts[0] });
+      console.log("payBackMoney res: "+resultMoney);
+      //const totalVotes = contractInstance.payBack.call(candidateName, { from: web3.eth.accounts[0] }).toString();
+      res.send({ ammount: resultMoney});
 
-    //  const totalVotes = contractInstance.totalVotesFor.call(candidateName, { from: web3.eth.accounts[0] }).toString();
-    //  res.send({ votes: totalVotes, name: candidateName });
-    });
   } catch (e) {
     res.status('400').send(`Failed! ${e}`);
   }

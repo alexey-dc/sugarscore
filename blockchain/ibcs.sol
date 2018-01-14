@@ -77,10 +77,11 @@ contract Ibcs {
 
   }
 
-  function payBack(uint256 amount) {
+  function payBack(uint256 amount) returns (uint256) {
 
+  your_wallet_balance = your_wallet_balance-amount;
 
-
+  return your_wallet_balance;
   }//payBack
 
 

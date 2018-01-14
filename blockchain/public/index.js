@@ -4,7 +4,12 @@ $(document).ready(function() {
     .then(res => res.json())
     .then(res => {
 
-      alert(JSON.stringify(res));
+      //alert(JSON.stringify(res));
+
+       $('.current_eth').html('<h2 class="current_eth"> Current ETH in wallet : '+res.total_amount_wallet+' </h2>');
+
+
+
     }).catch(function(err) {
       // Error :(
     });//fetch
@@ -19,11 +24,11 @@ $(document).ready(function() {
     $('#candidatesTable').html(candidatesTableHTML);
   }).catch(function(err) {
     // Error :(
-  });
+  });  //fetch
 
   $('#pay_back_currency').click(function(event) {
 
-    alert('Thanks for paying back '+  $('#payback_ammount').val() +" ETH");
+  //  alert('Thanks for paying back '+  $('#payback_ammount').val() +" ETH");
 
     const headers = new Headers({
       "Content-Type": "application/json",
@@ -36,8 +41,12 @@ $(document).ready(function() {
         })
         .then(res => res.json())
         .then(res => {
-          $('#' + res.name).html(res.votes);
+
+          alert(JSON.stringify(res));
+
+          $('.current_eth').html(res.ammount);
         }).catch(function() {
+
           // Error
         });
 
