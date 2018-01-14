@@ -37,7 +37,7 @@ To start, first run testRPC server, then run app server.
   web3Client.js
 
 
-#API:
+# API:
     - getProfile(address)
     - coinsIn (int)
     - totalBorrowed (int)
@@ -46,9 +46,9 @@ To start, first run testRPC server, then run app server.
     - getLoans(address)
     - loans (array)
       [
-        - loanId (int)
-        - paybackAmount (int)
-        - daysRemaining (int)
+         loanId (int)
+         paybackAmount (int)
+         daysRemaining (int)
       ]
     - borrow(address, amount, ratePercent, durationDays)
     - payBack(address, loanId)
