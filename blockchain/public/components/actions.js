@@ -34,18 +34,18 @@ export const receiveLoans = (loans) => {
 const postBorrowRequest = (data) => {
   return (
     $.ajax({
-      method: 'POST',
+      method: 'GET',
       url: '/borrow',
-      data
+      data: data
     })
   );
 };
 const payBack = (data) => {
   return (
     $.ajax({
-      method: 'POST',
+      method: 'GET',
       url: '/payBack',
-      data
+      data: data
     })
   );
 };

@@ -50,14 +50,14 @@ app.get('/getLoans', function(req,res) {
   res.send(unpayedLoans);
 });
 
-app.post('/borrow', function(req, res) {
+app.get('/borrow', function(req, res) {
   var address = req.query.address;
   var amount = req.query.amount;
   var ratePercent = req.query.ratePercent;
   var durationDays = req.query.durationDays;
-  var origination = new Date();
-
+  var origination = new Date().getTime();
   try{
+    console.log(amount, ratePercent, origination, durationDays, address)
     contractInstance.borrow(amount, ratePercent, origination, durationDays, address, { from: web3.eth.accounts[0] }, function(result) {
       // TODO: support failure
       console.log("Borrow result: ", result)
@@ -68,7 +68,7 @@ app.post('/borrow', function(req, res) {
   }
 });
 
-app.post('/payBack', function(req, res) {
+app.get('/payBack', function(req, res) {
   var address = req.query.address;
   var loanId = req.query.loanId;
   var repayTimestamp = new Date();
