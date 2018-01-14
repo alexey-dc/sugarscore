@@ -13603,7 +13603,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 var _defaultState = {
-  currentUser: null
+  currentUser: null,
+  loans: [{ loanId: 0, paybackAmount: 5, daysRemaining: 10 }, { loanId: 1, paybackAmount: 1, daysRemaining: 12 }, { loanId: 2, paybackAmount: 1.5, daysRemaining: 18 }]
 };
 
 var configureStore = function configureStore() {
@@ -13742,7 +13743,7 @@ var Borrow = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        null,
+        { className: 'borrow-form-container' },
         _react2.default.createElement('input', {
           type: 'number',
           name: 'borrowAmount',
@@ -13896,11 +13897,19 @@ var Payback = function Payback(_ref) {
       payback = _ref.payback;
 
   var loanList = loans.map(function (loan) {
-    return _react2.default.createElement(_payback_list_item2.default, { loan: loan, loanId: 0, payback: payback });
+    return _react2.default.createElement(_payback_list_item2.default, { loan: loan, payback: payback });
   });
+  var bankRoll = 1.45;
   return _react2.default.createElement(
     'div',
     null,
+    _react2.default.createElement(
+      'h1',
+      null,
+      'You have ',
+      bankRoll,
+      ' ETH'
+    ),
     _react2.default.createElement(
       'ul',
       null,
@@ -13935,7 +13944,7 @@ var _actions = __webpack_require__(53);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  var loans = ['loan1', 'loan2', 'loan3'];
+  var loans = state.loans;
   return {
     loans: loans
   };
@@ -13968,23 +13977,37 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PaybackListItem = function PaybackListItem(_ref) {
   var loan = _ref.loan,
-      loanId = _ref.loanId,
       payback = _ref.payback;
 
   return _react2.default.createElement(
-    'li',
-    null,
+    "li",
+    { className: "loan-card" },
     _react2.default.createElement(
-      'h1',
+      "h1",
       null,
-      loan
+      "Loan #",
+      loan.loanId
     ),
     _react2.default.createElement(
-      'button',
+      "h2",
+      null,
+      "You owe ",
+      loan.paybackAmount,
+      " ETH"
+    ),
+    _react2.default.createElement(
+      "h2",
+      null,
+      "You have ",
+      loan.daysRemaining,
+      " days remaining"
+    ),
+    _react2.default.createElement(
+      "button",
       { onClick: function onClick() {
-          return payback(loanId);
+          return payback(loan.loanId);
         } },
-      'Payback'
+      "Payback"
     )
   );
 };
@@ -14031,7 +14054,14 @@ var reducer = function reducer() {
       return newState;
     case _actions.PAYBACK_LOAN:
       newState = Object.assign({}, state);
-      delete newState[action.payload];
+      var loans = newState.loans;
+      var result = [];
+      //REALLY slow. In future receive hash of loans instead of array
+      for (var i = 0; i < loans.length; i++) {
+        if (loans[i].loanId !== action.payload) result.push(loans[i]);
+      }
+      newState.loans = result;
+      // delete newState.loans[action.payload];
       return newState;
     default:
       return state;
@@ -14150,7 +14180,7 @@ var Splash = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'form',
-        null,
+        { className: 'public-key' },
         _react2.default.createElement('input', {
           type: 'text',
           name: 'publicKey',
@@ -14252,7 +14282,7 @@ var TopNav = function TopNav() {
     ),
     _react2.default.createElement(
       'div',
-      null,
+      { className: 'nav-links' },
       _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/borrow' },

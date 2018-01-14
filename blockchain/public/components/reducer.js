@@ -23,7 +23,15 @@ const reducer = (state = initialState, action) => {
       return newState;
     case PAYBACK_LOAN:
       newState = Object.assign({}, state); 
-      delete newState[action.payload];
+      let loans = newState.loans;
+      let result = [];
+      //REALLY slow. In future receive hash of loans instead of array
+      for(let i = 0; i < loans.length; i++) {
+        if (loans[i].loanId !== action.payload)
+          result.push(loans[i]);
+      }
+      newState.loans = result;
+      // delete newState.loans[action.payload];
       return newState;
     default:
       return state;

@@ -7,7 +7,7 @@ const TopNav = () => {
       <div className="brand">
         <Link to="/">ChangeCred</Link>
       </div>
-      <div>
+      <div className="nav-links">
         <Link to="/borrow">Borrow</Link>
         <Link to="/payback">Payback</Link>
       </div>

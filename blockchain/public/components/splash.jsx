@@ -19,7 +19,7 @@ class Splash extends React.Component {
   }
   render() {
     return (
-      <form>
+      <form className="public-key">
         <input 
           type="text" 
           name="publicKey" 

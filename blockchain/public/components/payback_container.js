@@ -4,7 +4,7 @@ import Payback from './payback';
 import { paybackLoan } from './actions';
 
 const mapStateToProps = (state, ownProps) => {
-  let loans = ['loan1', 'loan2', 'loan3'];
+  let loans = state.loans;
   return {
     loans
   };

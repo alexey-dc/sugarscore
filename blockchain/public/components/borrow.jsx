@@ -19,7 +19,7 @@ class Borrow extends React.Component {
   }
   render() {
     return (
-      <form>
+      <form className="borrow-form-container">
         <input 
           type="number" 
           name="borrowAmount" 
@@ -29,6 +29,7 @@ class Borrow extends React.Component {
         />
         
         <button onClick={this.handleSubmit}>Submit</button>
+
       </form>
     );
   }

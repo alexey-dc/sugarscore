@@ -61,5 +61,51 @@ input[type="submit"] {
 nav.nav-container {
   display: flex;
   justify-content: space-between;
+  padding: 20px 20px;
 }
+
+div.nav-links > a {
+  background: blue;
+  padding: 5px;
+  margin: 0px 10px;
+}
+
+input[type=text], input[type=number] {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+ 
+input[type=text]:focus, input[type=number]:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+li.loan-card {
+  padding: 10px 10px;
+  margin: 0 auto;
+}
+
+li.loan-card:hover {
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+
+li.loan-card > h1 {
+  display: inline-block;
+  border: 1px solid black;
+  font-size: 14px;
+}
+li.loan-card > h2 {
+  
+}
+
 
