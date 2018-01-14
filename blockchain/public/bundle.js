@@ -19327,8 +19327,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     // getUser: () => dispatch(getEvents())
-    login: function login(user) {
-      return dispatch((0, _actions.loginUser)(user));
+    login: function login(address) {
+      return dispatch((0, _actions.getProfileThunk)(address));
     }
   };
 };

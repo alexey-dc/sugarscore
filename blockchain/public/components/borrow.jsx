@@ -18,6 +18,7 @@ class Borrow extends React.Component {
     this.props.newLoan(this.state.borrowAmount);
     this.props.history.push(`/payback`);
   }
+  
   render() {
     return (
       <div className="borrow-container">
