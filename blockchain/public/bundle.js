@@ -13563,7 +13563,9 @@ var App = function App() {
       _react2.default.createElement(
         _reactRouterDom.Switch,
         null,
-        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _splash2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/borrow', component: _splash2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/payback', component: _splash2.default })
       )
     )
   );
